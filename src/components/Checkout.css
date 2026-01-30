@@ -1,0 +1,242 @@
+/* Checkout.css */
+.checkout-wrapper {
+    display: flex;
+    gap: 40px;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    color: #333;
+}
+
+.checkout-main {
+    flex: 1;
+}
+
+.checkout-sidebar {
+    width: 350px;
+}
+
+h2.checkout-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #1a1a1a;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.checkout-section {
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #1a1a1a;
+}
+
+/* Product Card */
+.product-card {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.product-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.product-name {
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: #111;
+}
+
+.product-description {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 5px;
+    line-height: 1.4;
+}
+
+.product-price {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #111;
+}
+
+/* Form Fields */
+.form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #4b5563;
+}
+
+.form-input {
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+}
+
+.form-input:focus {
+    border-color: #3b82f6;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.radio-group {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+/* Sidebar / Summary */
+.summary-card {
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 24px;
+    position: sticky;
+    top: 20px;
+}
+
+.summary-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #111;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    color: #4b5563;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #111;
+}
+
+.checkout-btn {
+    width: 100%;
+    background: #1e293b;
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.2s;
+}
+
+.checkout-btn:hover {
+    background: #0f172a;
+}
+
+.secure-payment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+    font-size: 0.8rem;
+    color: #6b7280;
+}
+
+.terms-checkbox {
+    margin-top: 15px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.4;
+}
+
+.terms-checkbox input {
+    margin-top: 3px;
+}
+
+/* Payment Methods */
+.payment-methods {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.payment-method {
+    flex: 1;
+    border: 1px solid #e5e7eb;
+    padding: 15px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    background: white;
+    transition: all 0.2s;
+}
+
+.payment-method.selected {
+    border-color: #3b82f6;
+    background: #eff6ff;
+}
+
+.payment-method-icon {
+    width: 24px;
+    height: 24px;
+    color: #4b5563;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .checkout-wrapper {
+        flex-direction: column;
+    }
+
+    .checkout-sidebar {
+        width: 100%;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

@@ -1,0 +1,171 @@
+.testimonials-section {
+    padding: var(--section-padding) 0;
+    background-color: var(--color-slate-50);
+    overflow: hidden;
+}
+
+.testimonials-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.testimonials-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+}
+
+.blue-text {
+    color: var(--color-azure-main);
+}
+
+/* Infinite Scroll */
+.infinite-scroll-container {
+    padding: 20px 0 60px;
+    position: relative;
+    width: 100%;
+}
+
+.scroll-track {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+    animation: scroll 40s linear infinite;
+}
+
+.testimonial-card {
+    background: white;
+    padding: 32px;
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--color-slate-200);
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-azure-main);
+    box-shadow: var(--shadow-premium);
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.review-date {
+    font-size: 0.75rem;
+    color: var(--color-slate-400);
+}
+
+.review-content {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-slate-600);
+    font-style: italic;
+    margin: 0;
+    flex: 1;
+}
+
+.author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.author-name {
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: var(--color-navy-deep);
+}
+
+.verified-text {
+    font-size: 0.7rem;
+    color: #10B981;
+    font-weight: 700;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-350px * 5 - 24px * 5));
+    }
+
+    /* Adjust based on original count */
+}
+
+/* Pause on hover */
+.scroll-track:hover {
+    animation-play-state: paused;
+}
+
+/* Comment Action Container */
+.comment-action-container {
+    max-width: 600px;
+    margin: 80px auto 0;
+    text-align: center;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 18px 40px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-comment-primary {
+    background: linear-gradient(135deg, var(--color-azure-main) 0%, var(--color-nexus-dark) 100%) !important;
+    color: white !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.btn-comment-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 153, 204, 0.4);
+}
+
+.btn-comment-secondary {
+    background: linear-gradient(135deg, var(--color-nexus-dark) 0%, var(--color-anthracite) 100%) !important;
+    color: white !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.btn-comment-secondary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.4);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+    .comment-action-container {
+        margin: 60px auto 0;
+        padding: 0 20px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 16px 32px;
+        font-size: 1rem;
+    }
+}

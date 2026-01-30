@@ -1,0 +1,213 @@
+.pricing-section {
+    padding: var(--section-padding) 0;
+    background-color: var(--color-gray-light);
+}
+
+.pricing-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    align-items: flex-start;
+}
+
+.pricing-card {
+    background: var(--color-white);
+    border: 1px solid rgba(26, 86, 219, 0.15);
+    padding: 0;
+    border-radius: var(--border-radius-lg);
+    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.pricing-card-inner {
+    padding: 60px 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pricing-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--color-nexus-blue);
+    box-shadow: 0 15px 40px rgba(26, 86, 219, 0.2);
+}
+
+.pricing-card.premium {
+    border: 2px solid var(--color-nexus-blue);
+    box-shadow: 0 20px 50px rgba(26, 86, 219, 0.2);
+    transform: scale(1.05);
+    z-index: 2;
+}
+
+.premium-badge {
+    background: var(--color-nexus-blue);
+    color: white;
+    padding: 12px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.pricing-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 16px;
+    font-weight: 800;
+    color: var(--color-anthracite);
+}
+
+.engagement-text {
+    font-size: 0.85rem;
+    color: var(--color-gray-medium);
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.price-block {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.price-val {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--color-anthracite);
+    font-family: 'Inter', sans-serif;
+}
+
+.price-ht {
+    font-size: 1rem;
+    color: var(--color-gray-medium);
+    margin-top: 10px;
+}
+
+.features-list {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: left;
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.9rem;
+    color: var(--color-gray-medium);
+}
+
+.feature-item.excluded {
+    opacity: 0.4;
+}
+
+.btn-plan {
+    width: 100% !important;
+    margin: 32px 0 16px !important;
+    padding: 16px 32px !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    border-radius: var(--border-radius-lg) !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    transition: all 0.3s ease !important;
+    position: relative !important;
+    z-index: 5 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Force colors for Access and Platinium buttons (non-active) */
+.btn-navy.btn-plan {
+    background-color: var(--color-anthracite) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(17, 24, 39, 0.3) !important;
+}
+
+.btn-navy.btn-plan:hover {
+    background-color: #000000 !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Force colors for Freelance (Premium/Active) button */
+.btn-primary.btn-plan {
+    background-color: var(--color-nexus-blue) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(26, 86, 219, 0.3) !important;
+}
+
+.sub-price {
+    font-size: 0.9rem;
+    color: var(--color-gray-medium);
+    margin-bottom: 24px;
+    font-weight: 600;
+}
+
+.sub-desc {
+    font-size: 0.85rem;
+    color: var(--color-gray-medium);
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    min-height: 40px;
+}
+
+.premium-desc {
+    min-height: 60px;
+}
+
+.tp-mini {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    color: var(--color-gray-medium);
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+.tp-mini img {
+    height: 16px;
+    width: auto;
+}
+
+.popular-header {
+    background: var(--color-nexus-blue);
+    color: white;
+    text-align: center;
+    padding: 12px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+@media (max-width: 1024px) {
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .pricing-card.premium {
+        transform: none;
+    }
+}

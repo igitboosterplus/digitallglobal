@@ -1,0 +1,79 @@
+.header-custom {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 20px 0;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+.header-custom.scrolled {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 15px 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-custom {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--color-navy-deep);
+}
+
+.logo-custom span {
+    color: var(--color-azure-main);
+}
+
+.nav-custom {
+    display: flex;
+    gap: 32px;
+}
+
+.nav-link-custom {
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-navy-deep);
+    transition: color 0.3s;
+}
+
+.nav-link-custom:hover {
+    color: var(--color-azure-main);
+}
+
+.btn-orange-header {
+    background: var(--color-orange-accent);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.2);
+}
+
+.mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+    .nav-custom {
+        display: none;
+    }
+
+    .mobile-toggle {
+        display: block;
+    }
+}

@@ -1,0 +1,116 @@
+.faq-section-custom {
+    padding: var(--section-padding) 0;
+    background-color: var(--color-white);
+}
+
+.faq-split-custom {
+    display: flex;
+    gap: 80px;
+}
+
+.faq-main-custom {
+    flex: 1.5;
+}
+
+.faq-main-custom h2 {
+    font-size: 2.2rem;
+    margin-bottom: 40px;
+}
+
+.faq-list-custom {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.faq-item-custom {
+    border-bottom: 1px solid var(--color-slate-100);
+}
+
+.faq-q-btn {
+    width: 100%;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+}
+
+.faq-a-box {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.faq-item-custom.open .faq-a-box {
+    max-height: 200px;
+    padding-bottom: 20px;
+    opacity: 1;
+}
+
+.faq-a-box p {
+    color: var(--color-slate-600);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Right Side: Card */
+.faq-side-card {
+    flex: 1;
+}
+
+.side-card-inner {
+    background: #0A111A;
+    color: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+}
+
+.side-card-inner h3 {
+    font-size: 1.25rem;
+    margin-bottom: 16px;
+    color: white;
+}
+
+.side-card-inner p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 30px;
+}
+
+.phone-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 32px;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.btn-orange-rounded {
+    background: var(--color-orange-accent);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 100px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+@media (max-width: 900px) {
+    .faq-split-custom {
+        flex-direction: column;
+    }
+}
