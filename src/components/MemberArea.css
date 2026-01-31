@@ -228,6 +228,13 @@
 
     .laptop-screen {
         padding: 12px 16px 16px;
+        min-height: 250px;
+        /* Ensure a minimum height for the screen content */
+    }
+
+    .laptop-content {
+        aspect-ratio: auto;
+        height: 220px;
     }
 
     .member-app-ui {
