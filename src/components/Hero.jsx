@@ -50,7 +50,7 @@ const Hero = () => {
                             <div className="geometry-square accent-azure"></div>
 
                             <div className="image-portal-premium">
-                                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop" alt="Premium Dashboard" />
+                                <img src="/solution_woman_placeholder_1768906067491.png" alt="Premium Dashboard" />
                                 <div className="image-overlay-glow"></div>
                             </div>
 

@@ -71,9 +71,31 @@
 @media (max-width: 900px) {
     .nav-custom {
         display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: white;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+        gap: 40px;
+    }
+
+    .nav-custom.open {
+        display: flex;
+    }
+
+    .nav-link-custom {
+        font-size: 1.5rem;
     }
 
     .mobile-toggle {
         display: block;
+        position: relative;
+        z-index: 1001;
+        color: var(--color-navy-deep);
     }
 }
