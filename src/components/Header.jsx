@@ -29,6 +29,10 @@ const Header = ({ onReserveClick, onNavigate }) => {
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
+        <div className="logo-custom" onClick={handleNavClick} style={{ cursor: 'pointer' }}>
+          Digitall<span>global</span>
+        </div>
+
         <nav className={`nav-custom ${isMobileMenuOpen ? 'open' : ''}`}>
           <a href="#tarifs" className="nav-link-custom" onClick={handleNavClick}>La solution</a>
           <a href="#tarifs" className="nav-link-custom" onClick={handleNavClick}>Tarifs</a>

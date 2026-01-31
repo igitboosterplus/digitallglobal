@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Play } from 'lucide-react';
 import './MemberArea.css';
 
 const MemberArea = () => {
     const [isPlaying, setIsPlaying] = useState(false);
-
-    // Vous pouvez remplacer cette URL par votre propre vidéo
-    const videoUrl = "https://www.youtube.com/embed/dQw4w9WgXcQ";
+    const videoRef = useRef(null);
 
     const handlePlayClick = () => {
         console.log("Play button clicked");
         setIsPlaying(true);
     };
+
+    useEffect(() => {
+        if (isPlaying && videoRef.current) {
+            videoRef.current.play().catch(err => {
+                console.error("Video play failed:", err);
+            });
+        }
+    }, [isPlaying]);
 
     return (
         <section className="member-area">
@@ -57,6 +63,7 @@ const MemberArea = () => {
                                 </>
                             ) : (
                                 <video
+                                    ref={videoRef}
                                     className="video-player"
                                     src="/assets/providers/video.mp4"
                                     title="Espace Membre Demo"
