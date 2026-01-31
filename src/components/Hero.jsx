@@ -73,10 +73,10 @@ const Hero = () => {
                         </div>
                         <div className="feature-text">
                             <h4>Écosystème de Réussite</h4>
-                            <p>Ditall Global™ allie innovation et accompagnement pour mettre à votre disposition une structure clé en main dédiée à la vente de services digitaux.</p>
+                            <p>Digitall global™ allie innovation et accompagnement pour mettre à votre disposition une structure clé en main dédiée à la vente de services digitaux.</p>
                         </div>
                     </div>
-                    <div className="featuqre-box orange">
+                    <div className="feature-box orange">
                         <div className="feature-icon-wrap">
                             <Zap size={24} />
                         </div>
