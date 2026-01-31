@@ -15,6 +15,7 @@ import VIPSupport from './components/VIPSupport';
 import FAQ from './components/FAQ';
 import { AuthProvider } from './context/AuthContext';
 import Checkout from './components/Checkout';
+import Chatbot from './components/Chatbot';
 
 function App() {
   const [isContactOpen, setIsContactOpen] = React.useState(false);
@@ -104,6 +105,7 @@ function App() {
           )}
         </main>
       </div>
+      <Chatbot />
     </AuthProvider>
   );
 }
