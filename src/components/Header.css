@@ -20,12 +20,18 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 }
 
 .logo-custom {
     font-size: 1.4rem;
     font-weight: 800;
     color: var(--color-navy-deep);
+    transition: transform 0.3s ease;
+}
+
+.logo-custom:active {
+    transform: scale(0.95);
 }
 
 .logo-custom span {

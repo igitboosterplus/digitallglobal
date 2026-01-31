@@ -22,9 +22,12 @@ const Header = ({ onReserveClick, onNavigate }) => {
   return (
     <header className={`header-custom ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container header-container">
-        <div className="logo-custom" onClick={handleNavClick} style={{ cursor: 'pointer' }}>
-          Digitall<span>global</span>
-        </div>
+        <button
+          className="mobile-toggle"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
 
         <nav className={`nav-custom ${isMobileMenuOpen ? 'open' : ''}`}>
           <a href="#tarifs" className="nav-link-custom" onClick={handleNavClick}>La solution</a>
@@ -39,12 +42,6 @@ const Header = ({ onReserveClick, onNavigate }) => {
             onClick={() => { onReserveClick(); handleNavClick(); }}
           >
             Réserver un appel
-          </button>
-          <button
-            className="mobile-toggle"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
