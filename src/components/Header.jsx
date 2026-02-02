@@ -20,7 +20,7 @@ const Header = ({ onReserveClick, onNavigate }) => {
   };
 
   return (
-    <header className={`header-custom ${isScrolled ? 'scrolled' : ''}`}>
+    <header className={`header-custom ${isScrolled ? 'scrolled' : ''} ${isMobileMenuOpen ? 'open-menu' : ''}`}>
       <div className="container header-container">
         <button
           className="mobile-toggle"
