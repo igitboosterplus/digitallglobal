@@ -33,11 +33,17 @@ const Header = ({ onReserveClick, onNavigate }) => {
           Digitall<span>global</span>
         </div>
 
+        <div
+          className={`nav-overlay ${isMobileMenuOpen ? 'open' : ''}`}
+          onClick={() => setIsMobileMenuOpen(false)}
+        ></div>
+
         <nav className={`nav-custom ${isMobileMenuOpen ? 'open' : ''}`}>
-          <a href="#tarifs" className="nav-link-custom" onClick={handleNavClick}>La solution</a>
+          <a href="#solution" className="nav-link-custom" onClick={handleNavClick}>La solution</a>
           <a href="#tarifs" className="nav-link-custom" onClick={handleNavClick}>Tarifs</a>
-          <a href="#avis" className="nav-link-custom" onClick={handleNavClick}>Avis Clients</a>
+          <a href="#avis" className="nav-link-custom" onClick={handleNavClick}>Avis clients</a>
           <a href="#" onClick={(e) => { e.preventDefault(); onReserveClick(); handleNavClick(); }} className="nav-link-custom">Contact</a>
+          <a href="#member-area" className="nav-link-custom" onClick={handleNavClick}>Espace membre</a>
         </nav>
 
         <div className="header-actions">

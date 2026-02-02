@@ -20,7 +20,7 @@ const MemberArea = () => {
     }, [isPlaying]);
 
     return (
-        <section className="member-area">
+        <section className="member-area" id="member-area">
             <div className="container">
                 <div className="member-header">
                     <h2>Découvrez l'espace membre</h2>

@@ -4,7 +4,7 @@ import './Services.css';
 
 const Services = () => {
     return (
-        <section className="solution-section">
+        <section className="solution-section" id="solution">
             <div className="container">
                 <div className="solution-header">
                     <h2>La Solution Digitall global</h2>

@@ -75,27 +75,62 @@
 }
 
 @media (max-width: 900px) {
-    .nav-custom {
+    .nav-overlay {
         display: none;
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        background: white;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(2px);
+        z-index: 998;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+
+    .nav-overlay.open {
+        display: block;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .nav-custom {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 300px;
+        background: #fdfdfd;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 100px 40px;
         z-index: 999;
-        gap: 40px;
+        gap: 25px;
+        transform: translateX(-100%);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.05);
     }
 
     .nav-custom.open {
-        display: flex;
+        transform: translateX(0);
     }
 
     .nav-link-custom {
-        font-size: 1.5rem;
+        font-size: 1.15rem;
+        font-weight: 500;
+        color: #4a5568 !important;
+        width: 100%;
+        padding: 5px 0;
+        display: block;
+        text-align: left;
+    }
+
+    .nav-link-custom:hover {
+        color: var(--color-azure-main) !important;
     }
 
     .mobile-toggle {
@@ -103,5 +138,16 @@
         position: relative;
         z-index: 1001;
         color: var(--color-navy-deep);
+        order: 1;
+    }
+
+    .logo-custom {
+        order: 2;
+        margin-right: auto;
+        margin-left: 15px;
+    }
+
+    .header-actions {
+        order: 3;
     }
 }
