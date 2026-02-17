@@ -15,7 +15,82 @@ import VIPSupport from './components/VIPSupport';
 import FAQ from './components/FAQ';
 import { AuthProvider } from './context/AuthContext';
 import Checkout from './components/Checkout';
-import Chatbot from './components/Chatbot';
+import WhatsAppButton from './components/WhatsAppButton';
+
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import Success from './components/Success';
+import Login from './components/Login';
+import MemberDashboard from './components/MemberDashboard';
+import { useAuth } from './context/AuthContext';
+
+// Protected Route Component
+const ProtectedRoute = ({ children }) => {
+  const { isLoggedIn, loading } = useAuth();
+
+  if (loading) return null;
+  if (!isLoggedIn) return <Navigate to="/login" />;
+
+  return children;
+};
+
+// Layout Manager to hide header/footer on specific routes
+const AppLayout = ({
+  isContactOpen,
+  closeContact,
+  openContact,
+  handleHeaderNav,
+  isCheckoutOpen,
+  selectedPlan,
+  openCheckout,
+  closeCheckout
+}) => {
+  const location = useLocation();
+  const hideChrome = ['/login', '/member-area'].includes(location.pathname);
+
+  return (
+    <div className="App">
+      {!hideChrome && <Header onReserveClick={openContact} onNavigate={handleHeaderNav} />}
+      <main>
+        <Routes>
+          <Route path="/" element={
+            isCheckoutOpen && selectedPlan ? (
+              <div className="container" style={{ padding: '40px 0' }}>
+                <Checkout plan={selectedPlan} onClose={closeCheckout} />
+              </div>
+            ) : (
+              <>
+                <Hero />
+                <Mission />
+                <Services />
+                <Pricing onOrder={openCheckout} />
+                <AgenciesSection />
+                <ProvidersSection />
+                <MemberArea />
+                <VIPSupport />
+                <FAQ />
+                <Testimonials />
+                <Modal isOpen={isContactOpen} onClose={closeContact}>
+                  <Contact />
+                </Modal>
+                <Footer />
+              </>
+            )
+          } />
+          <Route path="/success" element={<Success />} />
+          <Route path="/cancel" element={<div style={{ padding: '100px', textAlign: 'center' }}><h1>Paiement annulé</h1><button onClick={() => window.location.href = '/'}>Retour</button></div>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/member-area" element={
+            <ProtectedRoute>
+              <MemberDashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="*" element={<div style={{ padding: '100px', textAlign: 'center' }}><h1>Page non trouvée</h1><button onClick={() => window.location.href = '/'}>Retour à l'accueil</button></div>} />
+        </Routes>
+      </main>
+      {!hideChrome && <WhatsAppButton />}
+    </div>
+  );
+};
 
 function App() {
   const [isContactOpen, setIsContactOpen] = React.useState(false);
@@ -28,84 +103,36 @@ function App() {
   const openCheckout = (plan) => {
     setSelectedPlan(plan);
     setIsCheckoutOpen(true);
-    window.history.pushState({ checkout: true }, '');
+    // window.history.pushState({ checkout: true }, ''); // Removed to avoid conflict with React Router
     window.scrollTo(0, 0);
   };
 
   const closeCheckout = () => {
+    setIsCheckoutOpen(false);
+    setSelectedPlan(null);
+  };
+
+  const handleHeaderNav = () => {
     if (isCheckoutOpen) {
       setIsCheckoutOpen(false);
       setSelectedPlan(null);
-      // Only go back if we are in the checkout state (checked via logic or assumption)
-      // Better: just reset state, and if history was pushed, let popstate handle it or manual back.
-      // Ideally, we just reset state here. If this was triggered by "Back" button, popstate handles it.
-      // If triggered by "Close" button, we might want to history.back() if we pushed state.
-      if (window.history.state && window.history.state.checkout) {
-        window.history.back();
-      }
-    }
-  };
-
-  React.useEffect(() => {
-    const handlePopState = (event) => {
-      // If we go back and state is null (or not checkout), close checkout
-      if (!event.state || !event.state.checkout) {
-        setIsCheckoutOpen(false);
-        setSelectedPlan(null);
-      }
-    };
-
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
-
-  // Handler for header navigation to ensure checkout closes
-  const handleHeaderNav = () => {
-    if (isCheckoutOpen) {
-      // If we are in checkout, navigating via header should close it.
-      // We can assume user wants to leave checkout.
-      if (window.history.state && window.history.state.checkout) {
-        window.history.back(); // This will trigger popstate which closes checkout
-      } else {
-        setIsCheckoutOpen(false);
-        setSelectedPlan(null);
-      }
     }
   };
 
   return (
     <AuthProvider>
-      <div className="App">
-        <Header onReserveClick={openContact} onNavigate={handleHeaderNav} />
-        <main>
-          {isCheckoutOpen ? (
-            <div className="container" style={{ padding: '40px 0' }}>
-              <Checkout plan={selectedPlan} onClose={closeCheckout} />
-            </div>
-          ) : (
-            <>
-              <Hero />
-              <Mission />
-              <Services />
-              <Pricing onOrder={openCheckout} />
-              <AgenciesSection />
-              <ProvidersSection />
-              <MemberArea />
-              <VIPSupport />
-              <FAQ />
-
-              <Testimonials />
-
-              <Modal isOpen={isContactOpen} onClose={closeContact}>
-                <Contact />
-              </Modal>
-
-              <Footer />
-            </>
-          )}
-        </main>
-      </div>
-      <Chatbot />
+      <BrowserRouter>
+        <AppLayout
+          isContactOpen={isContactOpen}
+          closeContact={closeContact}
+          openContact={openContact}
+          handleHeaderNav={handleHeaderNav}
+          isCheckoutOpen={isCheckoutOpen}
+          selectedPlan={selectedPlan}
+          openCheckout={openCheckout}
+          closeCheckout={closeCheckout}
+        />
+      </BrowserRouter>
     </AuthProvider>
   );
 }

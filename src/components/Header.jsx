@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 const Header = ({ onReserveClick, onNavigate }) => {
@@ -39,11 +40,11 @@ const Header = ({ onReserveClick, onNavigate }) => {
         ></div>
 
         <nav className={`nav-custom ${isMobileMenuOpen ? 'open' : ''}`}>
-          <a href="#solution" className="nav-link-custom" onClick={handleNavClick}>La solution</a>
-          <a href="#tarifs" className="nav-link-custom" onClick={handleNavClick}>Tarifs</a>
-          <a href="#avis" className="nav-link-custom" onClick={handleNavClick}>Avis clients</a>
+          <a href="/#solution" className="nav-link-custom" onClick={handleNavClick}>La solution</a>
+          <a href="/#tarifs" className="nav-link-custom" onClick={handleNavClick}>Tarifs</a>
+          <a href="/#avis" className="nav-link-custom" onClick={handleNavClick}>Avis clients</a>
           <a href="#" onClick={(e) => { e.preventDefault(); onReserveClick(); handleNavClick(); }} className="nav-link-custom">Contact</a>
-          <a href="#member-area" className="nav-link-custom" onClick={handleNavClick}>Espace membre</a>
+          <Link to="/member-area" className="nav-link-custom" onClick={handleNavClick}>Espace membre</Link>
         </nav>
 
         <div className="header-actions">

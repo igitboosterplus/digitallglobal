@@ -6,24 +6,21 @@ const Pricing = ({ onOrder }) => {
     // Feature lists 
     const accessFeatures = [
         { text: "Votre Agence Digitale : Tout pour réussir", included: true },
-        { text: "Liste de prestataires premium", included: true },
+        { text: "Liste de prestataires", included: true },
         { text: "Accès à votre espace membre dédié", included: true },
         { text: "Création d'un logo professionnel sur-mesure", included: true },
-        { text: "+10 services digitaux prêts à vendre dès aujourd'hui", included: true },
-        { text: "+34 packs métiers exclusifs pour vos clients", included: true },
-        { text: "+25 Tutoriels vidéos exclusifs", included: true },
-        { text: "+30 templates de campagnes publicitaires (édition 2025)", included: true },
+        { text: "4 services digitaux prêts à vendre dès aujourd'hui", included: true },
+        { text: "3 packs métiers exclusifs pour vos clients", included: true },
+        { text: "5 Tutoriels vidéos exclusifs", included: true },
+        { text: "5 templates de campagnes publicitaires (édition 2025)", included: true },
         { text: "4 techniques gratuites pour acquérir vos premiers clients", included: true },
-        { text: "Accès à des bonus exclusifs", included: true },
         { text: "Accès à des stratégies & ressources inédites", included: true },
         { text: "Installation complète sur notre hébergement", included: true },
+        { text: "Accès à des bonus exclusifs", included: false },
         { text: "1 heure de coaching individuel", included: false },
         { text: "Accès administrateur immédiat", included: false },
-        { text: "Accompagnement VIP : 12 heures de coaching...", included: false },
-        { text: "Accès direct aux Fondateur", included: false },
-        { text: "Pack Référence : Boostez votre taux...", included: false },
-        { text: "6 mois support téléphonique VIP", included: false },
-        { text: "6 Mois de maintenance", included: false },
+        { text: "Accès direct a la Fondatrice", included: false },
+        { text: "3 Mois de maintenance", included: false },
     ];
 
     const premiumFeatures = [
@@ -31,21 +28,18 @@ const Pricing = ({ onOrder }) => {
         { text: "Liste de prestataires premium", included: true },
         { text: "Accès à votre espace membre dédié", included: true },
         { text: "Création d'un logo professionnel sur-mesure", included: true },
-        { text: "+10 services digitaux prêts à vendre dès aujourd'hui", included: true },
-        { text: "+34 packs métiers exclusifs pour vos clients", included: true },
-        { text: "+25 Tutoriels vidéos exclusifs", included: true },
-        { text: "+30 templates de campagnes publicitaires (édition 2025)", included: true },
+        { text: "7 services digitaux prêts à vendre dès aujourd'hui", included: true },
+        { text: "6 packs métiers exclusifs pour vos clients", included: true },
+        { text: "10 Tutoriels vidéos exclusifs", included: true },
+        { text: "8 templates de campagnes publicitaires (édition 2025)", included: true },
         { text: "4 techniques gratuites pour acquérir vos premiers clients", included: true },
-        { text: "Accès à des bonus exclusifs", included: true },
         { text: "Accès à des stratégies & ressources inédites", included: true },
         { text: "1 heure de coaching individuel", included: true },
         { text: "Accès administrateur immédiat", included: true },
         { text: "Installation complète sur notre hébergement", included: true },
-        { text: "Accompagnement VIP : 12 heures de coaching...", included: false },
+        { text: "Accès à des bonus exclusifs", included: true },
         { text: "Accès direct aux Fondateur", included: false },
-        { text: "Pack Référence : Boostez votre taux...", included: false },
-        { text: "6 mois support téléphonique VIP", included: false },
-        { text: "6 Mois de maintenance", included: false },
+        { text: "3 Mois de maintenance", included: false },
 
     ];
 
@@ -55,19 +49,16 @@ const Pricing = ({ onOrder }) => {
         { text: "Accès à votre espace membre dédié", included: true },
         { text: "Création d'un logo professionnel sur-mesure", included: true },
         { text: "+10 services digitaux prêts à vendre dès aujourd'hui", included: true },
-        { text: "+34 packs métiers exclusifs pour vos clients", included: true },
+        { text: "8 packs métiers exclusifs pour vos clients", included: true },
         { text: "+25 Tutoriels vidéos exclusifs", included: true },
-        { text: "+30 templates de campagnes publicitaires (édition 2025)", included: true },
+        { text: "10 templates de campagnes publicitaires (édition 2025)", included: true },
         { text: "4 techniques gratuites pour acquérir vos premiers clients", included: true },
         { text: "Accès à des stratégies & ressources inédites", included: true },
-        { text: "Accès à des bonus exclusifs", included: true },
         { text: "Accès administrateur immédiat", included: true },
         { text: "Installation complète sur notre hébergement", included: true },
-        { text: "Accompagnement VIP : 12 heures de coaching, un raccourci vers la réussite...", included: true },
-        { text: "Accès direct aux Fondateur", included: true },
-        { text: "Pack Référence : Boostez votre taux de conversion...", included: true },
-        { text: "6 mois support téléphonique VIP", included: true },
-        { text: "6 Mois de maintenance", included: true },
+        { text: "Accès à des bonus exclusifs", included: true },
+        { text: "Accès direct a la Fondatrice", included: true },
+        { text: "3 Mois de maintenance", included: true },
     ];
 
 
@@ -86,18 +77,18 @@ const Pricing = ({ onOrder }) => {
                     {/* ACCESS */}
                     <div className="pricing-card">
                         <div className="pricing-card-inner">
-                            <h3>Offre Access</h3>
+                            <h3>Offre Started</h3>
                             <div className="engagement-text">Engagement 6 mois</div>
 
                             <div className="price-block">
-                                <span className="price-val">197€</span>
+                                <span className="price-val">149€</span>
                                 <span className="price-ht">HT / Mois</span>
                             </div>
-                            <div className="sub-price">Agence En Location</div>
+                            <div className="sub-price">Pour un dbut prometeur et un accompagnement reussir</div>
 
                             <button
                                 className="btn btn-navy btn-plan"
-                                onClick={() => onOrder({ name: 'Offre Access', price: '197€', type: 'access', description: "Dès le 1er mois – Vous avez accès à votre espace membre pour découvrir les outils et la solution." })}
+                                onClick={() => onOrder({ name: 'Offre Access', price: '149€', type: 'access', description: "Dès le 1er mois – Vous avez accès à votre espace membre pour découvrir les outils et la solution." })}
                             >
                                 COMMANDER
                             </button>
@@ -120,12 +111,12 @@ const Pricing = ({ onOrder }) => {
                     <div className="pricing-card premium">
                         <div className="popular-header">POPULAIRE</div>
                         <div className="pricing-card-inner">
-                            <h3>Offre Freelance</h3>
-                            <div className="engagement-text">Lifetime</div>
+                            <h3>Offre Pro</h3>
+                            <div className="engagement-text">Annuelle</div>
 
                             <div className="price-block">
-                                <span className="price-val">1799€</span>
-                                <span className="price-ht">HT</span>
+                                <span className="price-val">1599€</span>
+                                <span className="price-ht">HT/Ans</span>
                             </div>
 
                             <div className="sub-desc premium-desc">
@@ -134,7 +125,7 @@ const Pricing = ({ onOrder }) => {
 
                             <button
                                 className="btn btn-primary btn-plan"
-                                onClick={() => onOrder({ name: 'Offre Premium', price: '1799€', type: 'premium', description: "Votre Agence Digitale Clé en Main. 8 modèles d'agences et 34 packs métier pour optimiser vos résultats." })}
+                                onClick={() => onOrder({ name: 'Offre Premium', price: '1599€', type: 'premium', description: "Votre Agence Digitale Clé en Main. 8 modèles d'agences et 34 packs métier pour optimiser vos résultats." })}
                             >
                                 COMMANDER
                             </button>
@@ -156,12 +147,12 @@ const Pricing = ({ onOrder }) => {
                     {/* PLATINIUM */}
                     <div className="pricing-card">
                         <div className="pricing-card-inner">
-                            <h3>Offre Platinium</h3>
-                            <div className="engagement-text">Lifetime</div>
+                            <h3>Offre Prenium</h3>
+                            <div className="engagement-text">Annuelle</div>
 
                             <div className="price-block">
-                                <span className="price-val">2990€</span>
-                                <span className="price-ht">HT</span>
+                                <span className="price-val">2099€</span>
+                                <span className="price-ht">HT/Ans</span>
                             </div>
 
                             <div className="sub-desc">
@@ -170,7 +161,7 @@ const Pricing = ({ onOrder }) => {
 
                             <button
                                 className="btn btn-navy btn-plan"
-                                onClick={() => onOrder({ name: 'Offre Platinium', price: '2990€', type: 'platinium', description: "Un accompagnement ultime avec accès direct aux fondateurs." })}
+                                onClick={() => onOrder({ name: 'Offre Platinium', price: '2099€', type: 'platinium', description: "Un accompagnement ultime avec accès direct aux fondateurs." })}
                             >
                                 COMMANDER
                             </button>

@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "access",
+    "stripe_price_id": "price_1SwPd5E7xgnUSKkw424ImaIB"
+  },
+  {
+    "id": 2,
+    "name": "access",
+    "stripe_price_id": "price_1SwPd5E7xgnUSKkw424ImaIB"
+  },
+  {
+    "id": 3,
+    "name": "platinium",
+    "stripe_price_id": "price_1SwPjWE7xgnUSKkwEbxZ2alg"
+  },
+  {
+    "id": 4,
+    "name": "platinium",
+    "stripe_price_id": "price_1SwPjWE7xgnUSKkwEbxZ2alg"
+  }
+]

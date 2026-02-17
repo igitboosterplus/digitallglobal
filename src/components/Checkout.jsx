@@ -245,11 +245,58 @@ const Checkout = ({ plan, onClose }) => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const [loading, setLoading] = useState(false);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Here you would integrate with a payment processor
-        alert(`Commande validée pour le plan ${plan.name} ! Montant total: ${formatPrice(total)}`);
-        onClose();
+
+        if (!formData.terms) {
+            alert("Veuillez accepter les conditions générales de vente.");
+            return;
+        }
+
+        setLoading(true);
+
+        try {
+            // 1. Create Checkout Session on Backend
+            const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/payment/create-checkout-session`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    plan: {
+                        name: plan.name,
+                        stripe_price_id: plan.type === 'access' ? 'price_1SwPd5E7xgnUSKkw424ImaIB' :
+                            plan.type === 'premium' ? 'price_1SwPhbE7xgnUSKkwi2BYG764' :
+                                'price_1SwPjWE7xgnUSKkwEbxZ2alg',
+                        is_lifetime: plan.type !== 'access'
+                    },
+                    email: formData.email,
+                    firstName: formData.firstName,
+                    lastName: formData.lastName
+                }),
+            });
+
+            const session = await response.json();
+
+            if (session.error) {
+                alert(`Erreur Stripe : ${session.error}`);
+                throw new Error(session.error);
+            }
+
+            // 2. Redirect to Stripe Checkout directly via the URL provided
+            if (session.url) {
+                window.location.href = session.url;
+            } else {
+                throw new Error("Impossible de récupérer l'URL de paiement.");
+            }
+        } catch (error) {
+            console.error('Checkout error:', error);
+            alert(`Erreur technique : ${error.message}`);
+        } finally {
+            setLoading(false);
+        }
     };
 
     if (!plan) return null;
@@ -596,8 +643,8 @@ const Checkout = ({ plan, onClose }) => {
                         <span>{formatPrice(total)}</span>
                     </div>
 
-                    <button className="checkout-btn" onClick={handleSubmit}>
-                        Payer {formatPrice(total)}
+                    <button className="checkout-btn" onClick={handleSubmit} disabled={loading}>
+                        {loading ? 'Redirection...' : `Payer ${formatPrice(total)}`}
                     </button>
 
                     <div className="secure-payment">

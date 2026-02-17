@@ -11,6 +11,7 @@ const Mission = () => {
                     <div className="mission-visual">
                         <div className="mission-circle-wrap">
                             <div className="mission-circle">
+                                <img src="/image-dame.jpeg" alt="Notre Mission" className="mission-img" />
                                 <div className="circle-pattern"></div>
                             </div>
                             <div className="mission-rating-box">
@@ -18,7 +19,6 @@ const Mission = () => {
                                     {[1, 2, 3, 4, 5].map(i => <Star key={i} size={16} fill="#4ADE80" color="#4ADE80" />)}
                                 </div>
                                 <p>"Vrai révolution digitale"</p>
-                                <span>Salma - CEO Tech</span>
                             </div>
                         </div>
                     </div>
