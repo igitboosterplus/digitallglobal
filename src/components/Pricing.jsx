@@ -84,7 +84,7 @@ const Pricing = ({ onOrder }) => {
                                 <span className="price-val">149€</span>
                                 <span className="price-ht">HT / Mois</span>
                             </div>
-                            <div className="sub-price">Pour un dbut prometeur et un accompagnement reussir</div>
+                            <div className="sub-price">pour un début prometteur et un accompagnement réussi </div>
 
                             <button
                                 className="btn btn-navy btn-plan"
