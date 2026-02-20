@@ -10,11 +10,11 @@ const stripe = stripeKey ? require('stripe')(stripeKey) : null;
 const { handleSuccessfulPayment } = require('../services/stripe.service');
 const pool = require('../config/db');
 
-// Correspondance plan -> key
+// Correspondance plan -> key (Synchronisée avec Pricing.jsx)
 const PLAN_MAPPING = {
-    access: process.env.STRIPE_PRICE_ACCESS,
-    premium: process.env.STRIPE_PRICE_PREMIUM,
-    platinium: process.env.STRIPE_PRICE_PLATINIUM
+    Started: process.env.STRIPE_PRICE_ACCESS,   // Offre Started
+    Pro: process.env.STRIPE_PRICE_PREMIUM,      // Offre Pro
+    Premium: process.env.STRIPE_PRICE_PLATINIUM // Offre Premium (Anciennement Platinium)
 };
 
 router.post('/create-checkout-session', async (req, res) => {
