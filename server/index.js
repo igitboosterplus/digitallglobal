@@ -15,8 +15,15 @@ const allowedOrigins = [
 
 app.use(cors({
     origin: function (origin, callback) {
-        // Autorise les requêtes sans origin (Postman, curl, webhooks Stripe)
-        if (!origin || allowedOrigins.includes(origin)) {
+        // Autorise :
+        // 1. Les requêtes sans origine (Mobile, Postman, Webhooks)
+        // 2. Ton domaine spécifique (FRONTEND_URL)
+        // 3. Tous les domaines vercel.app (pour faciliter les tests)
+        // 4. Localhost
+        if (!origin ||
+            allowedOrigins.includes(origin) ||
+            origin.endsWith('.vercel.app') ||
+            origin.includes('localhost')) {
             callback(null, true);
         } else {
             console.warn('⛔ CORS refusé pour:', origin);
