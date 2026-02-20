@@ -88,7 +88,7 @@ const Pricing = ({ onOrder }) => {
 
                             <button
                                 className="btn btn-navy btn-plan"
-                                onClick={() => onOrder({ name: 'Offre Access', price: '149€', type: 'access', description: "Dès le 1er mois – Vous avez accès à votre espace membre pour découvrir les outils et la solution." })}
+                                onClick={() => onOrder({ name: 'Offre Started', price: '149€', type: 'Started', description: "Dès le 1er mois – Vous avez accès à votre espace membre pour découvrir les outils et la solution." })}
                             >
                                 COMMANDER
                             </button>
@@ -125,7 +125,7 @@ const Pricing = ({ onOrder }) => {
 
                             <button
                                 className="btn btn-primary btn-plan"
-                                onClick={() => onOrder({ name: 'Offre Premium', price: '1599€', type: 'premium', description: "Votre Agence Digitale Clé en Main. 8 modèles d'agences et 34 packs métier pour optimiser vos résultats." })}
+                                onClick={() => onOrder({ name: 'Offre Pro', price: '1599€', type: 'Pro', description: "Votre Agence Digitale Clé en Main. 8 modèles d'agences et 34 packs métier pour optimiser vos résultats." })}
                             >
                                 COMMANDER
                             </button>
@@ -161,7 +161,7 @@ const Pricing = ({ onOrder }) => {
 
                             <button
                                 className="btn btn-navy btn-plan"
-                                onClick={() => onOrder({ name: 'Offre Platinium', price: '2099€', type: 'platinium', description: "Un accompagnement ultime avec accès direct aux fondateurs." })}
+                                onClick={() => onOrder({ name: 'Offre Premium', price: '2099€', type: 'Premium', description: "Un accompagnement ultime avec accès direct aux fondateurs." })}
                             >
                                 COMMANDER
                             </button>

@@ -8,10 +8,11 @@ const PORT = process.env.PORT || 5000;
 
 // 🔒 Sécurité CORS : autorise uniquement votre frontend (Vercel) et localhost
 const allowedOrigins = [
-    process.env.FRONTEND_URL,                    // Ex: https://www.digitallglobal.com
+    process.env.FRONTEND_URL,                    // URL définie dans Vercel
+    'https://digitallglobal.com',               // Ton domaine officiel
+    'https://www.digitallglobal.com',           // Version avec www
     'http://localhost:5173',                     // Dev local
-    'http://localhost:3000',                     // Dev local alternatif
-].filter(Boolean); // Supprime les valeurs undefined
+].filter(Boolean);
 
 app.use(cors({
     origin: function (origin, callback) {
