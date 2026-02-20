@@ -12,23 +12,23 @@ router.post('/login', async (req, res) => {
     }
 
     try {
-        // Find user by email
-        const [users] = await pool.execute('SELECT * FROM users WHERE email = ?', [email]);
+        // Trouver l'utilisateur par email (MySQL : ? au lieu de $1)
+        const [rows] = await pool.execute('SELECT * FROM users WHERE email = ?', [email]);
 
-        if (users.length === 0) {
+        if (rows.length === 0) {
             return res.status(401).json({ success: false, message: 'Identifiants incorrects.' });
         }
 
-        const user = users[0];
+        const user = rows[0];
 
-        // Compare password
+        // Vérifier le mot de passe
         const match = await bcrypt.compare(password, user.password_hash);
 
         if (!match) {
             return res.status(401).json({ success: false, message: 'Identifiants incorrects.' });
         }
 
-        // Return user info (excluding password)
+        // Retourner les infos utilisateur (sans le mot de passe)
         const { password_hash, ...userInfo } = user;
 
         res.json({
@@ -52,27 +52,27 @@ router.post('/change-password', async (req, res) => {
     }
 
     try {
-        // Find user
-        const [users] = await pool.execute('SELECT * FROM users WHERE id = ?', [userId]);
+        // Trouver l'utilisateur
+        const [rows] = await pool.execute('SELECT * FROM users WHERE id = ?', [userId]);
 
-        if (users.length === 0) {
+        if (rows.length === 0) {
             return res.status(404).json({ success: false, message: 'Utilisateur non trouvé.' });
         }
 
-        const user = users[0];
+        const user = rows[0];
 
-        // Verify current password
+        // Vérifier le mot de passe actuel
         const match = await bcrypt.compare(currentPassword, user.password_hash);
         if (!match) {
             return res.status(401).json({ success: false, message: 'Mot de passe actuel incorrect.' });
         }
 
-        // Hash new password
+        // Hasher le nouveau mot de passe
         const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-        // Update password and clear must_change_password flag
+        // Mettre à jour le mot de passe
         await pool.execute(
-            'UPDATE users SET password_hash = ?, must_change_password = 0 WHERE id = ?',
+            'UPDATE users SET password_hash = ?, must_change_password = false WHERE id = ?',
             [hashedPassword, userId]
         );
 

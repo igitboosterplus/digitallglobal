@@ -48,20 +48,7 @@ router.post('/stripe', async (req, res) => {
     res.json({ received: true });
 });
 
-// 🧪 TEST ENDPOINT - Pour simuler un paiement sans Stripe CLI
-router.post('/test-payment', async (req, res) => {
-    console.log('🧪 Test endpoint called - Simulating payment webhook...');
-
-    const { session } = req.body;
-
-    try {
-        await handleSuccessfulPayment(session);
-        console.log('✅ Test payment processed successfully!');
-        res.json({ success: true, message: 'Account created and email sent!' });
-    } catch (error) {
-        console.error('❌ Test payment error:', error.message);
-        res.status(500).json({ success: false, error: error.message });
-    }
-});
+// ⛔ ENDPOINT DE TEST SUPPRIMÉ EN PRODUCTION
+// Ne jamais exposer un endpoint qui crée des comptes sans vérification Stripe réelle
 
 module.exports = router;

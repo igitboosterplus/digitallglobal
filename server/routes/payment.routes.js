@@ -2,31 +2,50 @@ const express = require('express');
 const router = express.Router();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const { handleSuccessfulPayment } = require('../services/stripe.service');
+const pool = require('../config/db');
+
+// Correspondance plan -> key
+const PLAN_MAPPING = {
+    access: process.env.STRIPE_PRICE_ACCESS,
+    premium: process.env.STRIPE_PRICE_PREMIUM,
+    platinium: process.env.STRIPE_PRICE_PLATINIUM
+};
 
 router.post('/create-checkout-session', async (req, res) => {
-    const { plan, email, firstName, lastName } = req.body;
+    const { planType, planName, email, firstName, lastName } = req.body;
     console.log('--- Nouvelle tentative de paiement ---');
-    console.log('ID du prix utilisé:', plan.stripe_price_id);
-    console.log('Mode forcé:', 'subscription');
+
+    const stripePriceId = PLAN_MAPPING[planType];
+
+    if (!stripePriceId) {
+        console.error('Plan invalide demandé:', planType);
+        return res.status(400).json({ error: 'Plan invalide.' });
+    }
 
     try {
+        // Vérifier en DB si c'est un paiement unique ou abonnement
+        const [plans] = await pool.execute('SELECT is_lifetime FROM plans WHERE stripe_price_id = ?', [stripePriceId]);
+        const isLifetime = plans.length > 0 ? plans[0].is_lifetime : false;
+
+        console.log('Plan:', planType, '| Mode:', isLifetime ? 'payment' : 'subscription');
+
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: [
                 {
-                    price: plan.stripe_price_id,
+                    price: stripePriceId,
                     quantity: 1,
                 },
             ],
-            mode: 'subscription',
+            mode: isLifetime ? 'payment' : 'subscription',
             customer_email: email,
             success_url: `${process.env.FRONTEND_URL || 'http://localhost:5173'}/success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${process.env.FRONTEND_URL || 'http://localhost:5173'}/cancel`,
             metadata: {
-                plan_name: plan.name,
+                plan_name: planName,
                 first_name: firstName,
                 last_name: lastName,
-                price_id: plan.stripe_price_id
+                price_id: stripePriceId
             },
         });
 
@@ -38,14 +57,14 @@ router.post('/create-checkout-session', async (req, res) => {
     }
 });
 
-// 🎯 NOUVEAU : Endpoint pour vérifier et traiter une session après redirection
+
+// Endpoint pour vérifier et traiter une session après redirection
 router.get('/verify-session/:sessionId', async (req, res) => {
     const { sessionId } = req.params;
 
     try {
         console.log('🔍 Vérification de la session:', sessionId);
 
-        // Récupérer les détails complets de la session depuis Stripe
         const session = await stripe.checkout.sessions.retrieve(sessionId, {
             expand: ['line_items']
         });
@@ -55,12 +74,7 @@ router.get('/verify-session/:sessionId', async (req, res) => {
             return res.status(404).json({ success: false, message: 'Session introuvable.' });
         }
 
-        console.log('Session status:', session.payment_status);
-        console.log('Customer Email:', session.customer_details?.email);
-
-        // Vérifier que le paiement est bien réussi
         if (session.payment_status === 'paid') {
-            // Traiter le paiement (créer compte, envoyer email, etc.)
             await handleSuccessfulPayment(session);
 
             res.json({

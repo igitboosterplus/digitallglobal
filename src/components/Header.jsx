@@ -31,7 +31,11 @@ const Header = ({ onReserveClick, onNavigate }) => {
         </button>
 
         <div className="logo-custom" onClick={handleNavClick} style={{ cursor: 'pointer' }}>
-          Digitall<span>global</span>
+          <img
+            src="/logo-digitall.png"
+            alt="Digitall Global Logo"
+            className="logo-img"
+          />
         </div>
 
         <div

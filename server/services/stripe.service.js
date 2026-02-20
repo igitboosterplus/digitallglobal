@@ -26,8 +26,8 @@ async function handleSuccessfulPayment(session) {
 
     // 0. Vérifier si cette session a déjà été traitée (éviter les doublons)
     const [existingSessions] = await pool.execute(
-        'SELECT id FROM subscriptions WHERE stripe_subscription_id = ?',
-        [stripeSubscriptionId || sessionId]
+        'SELECT id FROM subscriptions WHERE stripe_subscription_id = ? OR stripe_subscription_id = ?',
+        [stripeSubscriptionId || sessionId, sessionId]
     );
 
     if (existingSessions.length > 0) {
@@ -77,7 +77,7 @@ async function handleSuccessfulPayment(session) {
     if (planId) {
         await pool.execute(
             'INSERT INTO subscriptions (user_id, plan_id, stripe_subscription_id, status) VALUES (?, ?, ?, ?)',
-            [userId, planId, stripeSubscriptionId, 'active']
+            [userId, planId, stripeSubscriptionId || sessionId, 'active']
         );
     }
 
@@ -101,12 +101,10 @@ async function handleSuccessfulPayment(session) {
             console.log('📧 Email de bienvenue envoyé avec succès.');
         } catch (emailError) {
             console.error('❌ Erreur d\'envoi d\'email (non-bloquante):', emailError.message);
-            // On ne throw pas d'erreur ici pour que le client voie quand même la page de succès
         }
     }
 
-    // 6. Launch background site creation (Placeholder)
-    console.log(`Launching site creation for user ${userId}...`);
+    console.log(`✅ Paiement traité avec succès pour l'utilisateur ${userId}`);
 }
 
 module.exports = {

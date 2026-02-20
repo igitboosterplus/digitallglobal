@@ -265,13 +265,10 @@ const Checkout = ({ plan, onClose }) => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    plan: {
-                        name: plan.name,
-                        stripe_price_id: plan.type === 'access' ? 'price_1SwPd5E7xgnUSKkw424ImaIB' :
-                            plan.type === 'premium' ? 'price_1SwPhbE7xgnUSKkwi2BYG764' :
-                                'price_1SwPjWE7xgnUSKkwEbxZ2alg',
-                        is_lifetime: plan.type !== 'access'
-                    },
+                    // 🔒 Sécurité : on envoie uniquement le TYPE de plan
+                    // Le serveur détermine lui-même le price_id depuis ses variables d'environnement
+                    planType: plan.type,   // 'access', 'premium', ou 'platinium'
+                    planName: plan.name,
                     email: formData.email,
                     firstName: formData.firstName,
                     lastName: formData.lastName

@@ -28,14 +28,24 @@
     font-weight: 800;
     color: var(--color-navy-deep);
     transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
 }
 
 .logo-custom:active {
     transform: scale(0.95);
 }
 
-.logo-custom span {
-    color: var(--color-azure-main);
+.logo-img {
+    height: 70px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+    transform: scale(1.03);
 }
 
 .nav-custom {
