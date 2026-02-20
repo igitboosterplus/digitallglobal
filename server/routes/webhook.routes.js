@@ -1,9 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const stripeKey = process.env.STRIPE_SECRET_KEY;
+
+if (!stripeKey) {
+    console.error('❌ ERREUR : STRIPE_SECRET_KEY est manquante dans les variables d\'environnement !');
+}
+
+const stripe = stripeKey ? require('stripe')(stripeKey) : null;
 const { handleSuccessfulPayment } = require('../services/stripe.service');
 
 router.post('/stripe', async (req, res) => {
+    if (!stripe) {
+        console.error('❌ Stripe n\'est pas initialisé.');
+        return res.status(500).send('Erreur de configuration serveur (Stripe).');
+    }
     const sig = req.headers['stripe-signature'];
     const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 

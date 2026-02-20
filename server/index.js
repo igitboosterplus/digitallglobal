@@ -44,9 +44,12 @@ app.use('/api/webhook', webhookRoutes);
 app.use('/api/payment', paymentRoutes);
 app.use('/api/auth', authRoutes);
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+// Démarrage du serveur uniquement si on n'est pas sur Vercel
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+    });
+}
 
 // Indispensable pour l'hébergement sur Vercel
 module.exports = app;

@@ -1,6 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const stripeKey = process.env.STRIPE_SECRET_KEY;
+
+if (!stripeKey) {
+    console.error('❌ ERREUR : STRIPE_SECRET_KEY est manquante dans les variables d\'environnement !');
+}
+
+const stripe = stripeKey ? require('stripe')(stripeKey) : null;
 const { handleSuccessfulPayment } = require('../services/stripe.service');
 const pool = require('../config/db');
 
@@ -12,6 +18,9 @@ const PLAN_MAPPING = {
 };
 
 router.post('/create-checkout-session', async (req, res) => {
+    if (!stripe) {
+        return res.status(500).json({ error: 'Stripe n\'est pas configuré sur le serveur.' });
+    }
     const { planType, planName, email, firstName, lastName } = req.body;
     console.log('--- Nouvelle tentative de paiement ---');
 
