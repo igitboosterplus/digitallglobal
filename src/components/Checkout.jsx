@@ -258,8 +258,14 @@ const Checkout = ({ plan, onClose }) => {
         setLoading(true);
 
         try {
+            // 🔒 Sécurité : On force le HTTPS si on est en production sur Vercel
+            let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+            if (apiUrl.includes('vercel.app')) {
+                apiUrl = apiUrl.replace('http://', 'https://');
+            }
+
             // 1. Create Checkout Session on Backend
-            const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/payment/create-checkout-session`, {
+            const response = await fetch(`${apiUrl}/api/payment/create-checkout-session`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
