@@ -87,21 +87,30 @@ async function handleSuccessfulPayment(session) {
         [userId, 'pending']
     );
 
-    // 5. Send Welcome Email (only if new user)
-    if (tempPassword) {
-        try {
-            const orderDetails = {
-                planName: planName,
-                amount: session.amount_total / 100,
-                currency: session.currency ? session.currency.toUpperCase() : 'EUR',
-                transactionId: session.payment_intent || session.id,
-                date: new Date().toLocaleDateString('fr-FR')
-            };
+    // 5. Envoyer les emails
+    try {
+        const orderDetails = {
+            planName: planName,
+            amount: session.amount_total / 100,
+            currency: session.currency ? session.currency.toUpperCase() : 'EUR',
+            transactionId: session.payment_intent || session.id,
+            date: new Date().toLocaleDateString('fr-FR')
+        };
+
+        const { sendAdminNotification } = require('./email.service');
+
+        // Email de bienvenue (uniquement si nouveau compte généré)
+        if (tempPassword) {
             await sendWelcomeEmail(customerEmail, tempPassword, orderDetails, customerName.split(' ')[0] || 'Client');
             console.log('📧 Email de bienvenue envoyé avec succès.');
-        } catch (emailError) {
-            console.error('❌ Erreur d\'envoi d\'email (non-bloquante):', emailError.message);
         }
+
+        // Email de notification ADMIN (pour TOUTE vente, nouveau ou ancien client)
+        await sendAdminNotification(orderDetails, customerEmail, customerName);
+        console.log('📧 Notification Admin envoyée pour une nouvelle vente.');
+
+    } catch (emailError) {
+        console.error('❌ Erreur d\'envoi d\'emails (non-bloquante):', emailError.message);
     }
 
     console.log(`✅ Paiement traité avec succès pour l'utilisateur ${userId}`);

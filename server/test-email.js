@@ -1,31 +1,47 @@
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 const { sendWelcomeEmail } = require('./services/email.service');
 
 async function testEmail() {
-    console.log('🧪 Test d\'envoi d\'email...\n');
+    console.log('--- TEST D\'ENVOI D\'EMAIL ---');
+    console.log('SMTP Host:', process.env.SMTP_HOST);
+    console.log('SMTP User:', process.env.SMTP_USER);
 
-    const testOrderDetails = {
-        planName: 'Offre Premium (TEST)',
-        amount: 1799.00,
+    const fakeOrder = {
+        planName: 'Offre Pro (Test)',
+        amount: '1599',
         currency: 'EUR',
-        transactionId: 'test_transaction_12345',
-        date: new Date().toLocaleDateString('fr-FR')
+        transactionId: 'TEST_' + Date.now(),
+        date: new Date().toLocaleDateString()
     };
 
     try {
+        // Test 1: Email de bienvenue Client
+        console.log('Envoi de l\'email client...');
         await sendWelcomeEmail(
-            'toyatankwajoelsorel@gmail.com', // Votre email réel pour le test
-            'MotDePasseTest123',
-            testOrderDetails,
-            'Joel'
+            process.env.SMTP_USER,
+            'MOT_DE_PASSE_123',
+            fakeOrder,
+            'Client Test'
         );
-        console.log('✅ Email envoyé avec succès !');
-        console.log('📧 Vérifiez votre boîte mail (et les spams).');
-    } catch (error) {
-        console.error('❌ Erreur lors de l\'envoi :', error.message);
-        console.error('Détails:', error);
-    }
 
-    process.exit(0);
+        // Test 2: Notification Admin
+        const { sendAdminNotification } = require('./services/email.service');
+        console.log('Envoi de la notification admin...');
+        await sendAdminNotification(
+            fakeOrder,
+            'client@test.com',
+            'Client Test'
+        );
+
+        console.log('✅ TEST RÉUSSI : Les deux emails ont été envoyés !');
+        console.log('Vérifiez votre boîte de réception pour les deux messages.');
+    } catch (error) {
+        console.error('❌ ÉCHEC DU TEST :', error.message);
+        if (error.message.includes('Invalid login')) {
+            console.log('Conseil : Vérifiez votre mot de passe d\'application Gmail.');
+        }
+    }
 }
 
 testEmail();

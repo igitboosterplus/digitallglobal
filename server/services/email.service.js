@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport({
  * @param {string} firstName - User's first name
  */
 async function sendWelcomeEmail(email, tempPassword, orderDetails, firstName) {
-    const memberAreaUrl = process.env.MEMBER_AREA_URL || 'https://digitall-global.com/login';
+    const memberAreaUrl = process.env.MEMBER_AREA_URL || 'https://digitallglobal.com/login';
     const { planName, amount, currency, transactionId, date } = orderDetails;
 
     const mailOptions = {
@@ -102,6 +102,40 @@ async function sendWelcomeEmail(email, tempPassword, orderDetails, firstName) {
     }
 }
 
+/**
+ * Sends a notification email to the admin about a new sale.
+ */
+async function sendAdminNotification(orderDetails, customerEmail, customerName) {
+    const { planName, amount, currency, transactionId } = orderDetails;
+
+    const mailOptions = {
+        from: `"Système Digitall Global" <${process.env.SMTP_USER}>`,
+        to: process.env.SMTP_USER, // L'admin reçoit le mail sur sa propre adresse
+        subject: `💰 NOUVELLE VENTE : ${planName} (${amount} ${currency})`,
+        html: `
+            <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+                <h2 style="color: #2ecc71;">Bravo ! Une nouvelle vente vient d'être réalisée.</h2>
+                <hr>
+                <p><strong>Client :</strong> ${customerName} (${customerEmail})</p>
+                <p><strong>Offre :</strong> ${planName}</p>
+                <p><strong>Montant :</strong> ${amount} ${currency}</p>
+                <p><strong>ID Transaction :</strong> <small>${transactionId}</small></p>
+                <hr>
+                <p style="font-size: 12px; color: #888;">Ceci est une notification automatique de votre moteur de vente Digitall Global.</p>
+            </div>
+        `,
+    };
+
+    try {
+        await transporter.sendMail(mailOptions);
+        console.log(`Admin notification sent for sale: ${transactionId}`);
+    } catch (error) {
+        console.error('Error sending admin notification:', error);
+        // On ne bloque pas le processus si la notification admin échoue
+    }
+}
+
 module.exports = {
-    sendWelcomeEmail
+    sendWelcomeEmail,
+    sendAdminNotification
 };
