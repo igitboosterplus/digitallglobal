@@ -16,9 +16,6 @@ const Checkout = ({ plan, onClose }) => {
         country: 'France',
         companyName: '',
         vatNumber: '',
-        cardNumber: '',
-        cardExpiry: '',
-        cardCvc: '',
         paymentMethod: 'card',
         terms: false
     });
@@ -222,15 +219,11 @@ const Checkout = ({ plan, onClose }) => {
     ];
 
     // Calculate totals
-    const vatRate = 0.20;
     const basePrice = plan ? parseFloat(plan.price.replace('€', '').trim()) : 0;
     const upsellPrice = 379; // Pack référence upsell price
 
-    let subtotal = basePrice;
-    if (upsell) subtotal += upsellPrice;
-
-    const vatAmount = subtotal * vatRate;
-    const total = subtotal + vatAmount;
+    let total = basePrice;
+    if (upsell) total += upsellPrice;
 
     // Helper to format currency
     const formatPrice = (p) => {
@@ -248,7 +241,24 @@ const Checkout = ({ plan, onClose }) => {
     const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        if (e) e.preventDefault();
+
+        // Validation des champs obligatoires
+        const requiredFields = [
+            { key: 'firstName', label: 'Prénom' },
+            { key: 'lastName', label: 'Nom' },
+            { key: 'email', label: 'Email' },
+            { key: 'phone', label: 'Téléphone' },
+            { key: 'zip', label: 'Code postal' },
+            { key: 'city', label: 'Ville' }
+        ];
+
+        for (const field of requiredFields) {
+            if (!formData[field.key] || formData[field.key].trim() === '') {
+                alert(`Veuillez remplir le champ : ${field.label}`);
+                return;
+            }
+        }
 
         if (!formData.terms) {
             alert("Veuillez accepter les conditions générales de vente.");
@@ -519,110 +529,15 @@ const Checkout = ({ plan, onClose }) => {
                     </div>
                 )}
 
-                {/* Paiement */}
-                <div className="checkout-section">
-                    <h3 className="section-title">Paiement</h3>
-                    <div className="payment-methods">
-                        <div
-                            className={`payment-method ${formData.paymentMethod === 'card' ? 'selected' : ''}`}
-                            onClick={() => setFormData({ ...formData, paymentMethod: 'card' })}
-                        >
-                            <CreditCard className="payment-method-icon" />
-                            <span>Carte Bancaire</span>
-                        </div>
-                        {/* Add other payment methods here if needed */}
+                {/* Section de validation */}
+                <div className="checkout-section" style={{ textAlign: 'center', padding: '30px', background: '#f8fafc', borderRadius: '12px' }}>
+                    <div style={{ marginBottom: '20px' }}>
+                        <ShieldCheck size={48} color="#2ecc71" style={{ margin: '0 auto 15px' }} />
+                        <h3 style={{ margin: 0, color: '#1e293b' }}>Paiement 100% Sécurisé</h3>
+                        <p style={{ fontSize: '0.9rem', color: '#64748b' }}>
+                            Vous allez être redirigé vers la plateforme sécurisée de <strong>Stripe</strong> pour finaliser votre commande.
+                        </p>
                     </div>
-
-                    {formData.paymentMethod === 'card' && (
-                        <div style={{ background: '#f8fafc', padding: '25px', borderRadius: '12px', marginTop: '10px', border: '1px solid #e2e8f0' }}>
-                            <h4 style={{ margin: '0 0 15px 0', fontSize: '1rem', fontWeight: '600', color: '#1e293b' }}>Informations de paiement</h4>
-
-                            <div className="form-group" style={{ marginBottom: '15px' }}>
-                                <div style={{ position: 'relative' }}>
-                                    <input
-                                        type="text"
-                                        name="cardNumber"
-                                        placeholder="Numéro de carte"
-                                        className="form-input"
-                                        style={{ width: '100%', paddingRight: '40px', backgroundColor: '#fff' }}
-                                        value={formData.cardNumber}
-                                        onChange={handleInputChange}
-                                    />
-                                    <CreditCard size={20} color="#64748b" style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)' }} />
-                                </div>
-                            </div>
-
-                            <div className="form-row">
-                                <div className="form-group">
-                                    <input
-                                        type="text"
-                                        name="cardExpiry"
-                                        placeholder="Date d'expiration (MMYY)"
-                                        className="form-input"
-                                        style={{ backgroundColor: '#fff' }}
-                                        value={formData.cardExpiry}
-                                        onChange={handleInputChange}
-                                        maxLength="4"
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <input
-                                        type="text"
-                                        name="cardCvc"
-                                        placeholder="Code de sécurité (CCV)"
-                                        className="form-input"
-                                        style={{ backgroundColor: '#fff' }}
-                                        value={formData.cardCvc}
-                                        onChange={handleInputChange}
-                                        maxLength="3"
-                                    />
-                                </div>
-                            </div>
-
-                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '15px', fontSize: '0.85rem', color: '#4b5563' }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                                    <Lock size={14} color="#6b7280" />
-                                    <span>Paiement sécurisé par Stripe</span>
-                                </div>
-                                <div style={{ display: 'flex', gap: '5px' }}>
-                                    {/* VISA Logo */}
-                                    <svg width="32" height="20" viewBox="0 0 32 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <rect width="32" height="20" rx="3" fill="#1A1F71" />
-                                        <text x="50%" y="55%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="12" fontWeight="900" fontFamily="sans-serif" fontStyle="italic">VISA</text>
-                                    </svg>
-
-                                    {/* Mastercard Logo */}
-                                    <svg width="32" height="20" viewBox="0 0 32 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <rect width="32" height="20" rx="3" fill="#0A2540" />
-                                        <circle cx="11" cy="10" r="6" fill="#EB001B" />
-                                        <circle cx="21" cy="10" r="6" fill="#F79E1B" />
-                                        <path d="M16 14.5C14.5 14.5 13.1 13.9 12.1 12.9C13.5 11.2 13.5 8.7 12.1 7.1C13.1 6.1 14.5 5.5 16 5.5C17.5 5.5 18.9 6.1 19.9 7.1C18.5 8.7 18.5 11.2 19.9 12.9C18.9 13.9 17.5 14.5 16 14.5Z" fill="#FF5F00" />
-                                    </svg>
-
-                                    {/* CB Logo (Carte Bancaire) */}
-                                    <svg width="32" height="20" viewBox="0 0 32 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <rect width="32" height="20" rx="3" fill="#0055A4" />
-                                        <path d="M8 5H24" stroke="white" strokeWidth="2" />
-                                        {/* Simple CB Text as vector path approximation or just text */}
-                                        <text x="50%" y="65%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="12" fontWeight="800" fontFamily="Arial">CB</text>
-                                    </svg>
-
-                                    {/* Maestro Logo */}
-                                    <svg width="32" height="20" viewBox="0 0 32 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <rect width="32" height="20" rx="3" fill="#0A2540" />
-                                        <circle cx="11" cy="10" r="6" fill="#EB001B" />
-                                        <circle cx="21" cy="10" r="6" fill="#00A4E0" />
-                                        <path d="M16 14.5C14.5 14.5 13.1 13.9 12.1 12.9C13.5 11.2 13.5 8.7 12.1 7.1C13.1 6.1 14.5 5.5 16 5.5C17.5 5.5 18.9 6.1 19.9 7.1C18.5 8.7 18.5 11.2 19.9 12.9C18.9 13.9 17.5 14.5 16 14.5Z" fill="#8B4E9E" fillOpacity="0.5" />
-                                        {/* Overlap area logic is complex, simpler representation: */}
-                                        <circle cx="21" cy="10" r="6" fill="#00A4E0" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div style={{ fontSize: '0.75rem', color: '#9ca3af', marginTop: '8px' }}>
-                                En validant ce formulaire, vous acceptez les conditions de service de Stripe.
-                            </div>
-                        </div>
-                    )}
                 </div>
 
             </div>
@@ -633,16 +548,18 @@ const Checkout = ({ plan, onClose }) => {
                     <h3 className="summary-title">Détail du prix</h3>
 
                     <div className="summary-row">
-                        <span>Total HT</span>
-                        <span>{formatPrice(subtotal)}</span>
+                        <span>Prix de l'offre</span>
+                        <span>{formatPrice(basePrice)}</span>
                     </div>
-                    <div className="summary-row">
-                        <span>TVA (20%)</span>
-                        <span>{formatPrice(vatAmount)}</span>
-                    </div>
+                    {upsell && (
+                        <div className="summary-row">
+                            <span>Pack Références</span>
+                            <span>{formatPrice(upsellPrice)}</span>
+                        </div>
+                    )}
 
-                    <div className="summary-total">
-                        <span>Total</span>
+                    <div className="summary-total" style={{ borderTop: '2px solid #e2e8f0', paddingTop: '15px' }}>
+                        <span>Total à payer</span>
                         <span>{formatPrice(total)}</span>
                     </div>
 
