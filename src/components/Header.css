@@ -164,6 +164,7 @@
         order: 3;
         /* Bouton "Réserver" à la fin (droite) */
         margin-left: auto;
+        margin-right: 15px;
     }
 
     .btn-orange-header {
