@@ -21,7 +21,7 @@ router.post('/create-checkout-session', async (req, res) => {
     if (!stripe) {
         return res.status(500).json({ error: 'Stripe n\'est pas configuré sur le serveur.' });
     }
-    const { planType, planName, email, firstName, lastName } = req.body;
+    const { planType, planName, email, firstName, lastName, address, zip, city, countryIso } = req.body;
     console.log('--- Nouvelle tentative de paiement ---');
 
     const stripePriceId = PLAN_MAPPING[planType];
@@ -38,7 +38,8 @@ router.post('/create-checkout-session', async (req, res) => {
 
         console.log('Plan:', planType, '| Mode:', isLifetime ? 'payment' : 'subscription');
 
-        const session = await stripe.checkout.sessions.create({
+        // Construction des options de la session
+        const sessionOptions = {
             payment_method_types: ['card'],
             line_items: [
                 {
@@ -48,6 +49,8 @@ router.post('/create-checkout-session', async (req, res) => {
             ],
             mode: isLifetime ? 'payment' : 'subscription',
             customer_email: email,
+            automatic_tax: { enabled: true },
+            tax_id_collection: { enabled: true },
             success_url: `${process.env.FRONTEND_URL || 'http://localhost:5173'}/success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${process.env.FRONTEND_URL || 'http://localhost:5173'}/cancel`,
             metadata: {
@@ -56,7 +59,21 @@ router.post('/create-checkout-session', async (req, res) => {
                 last_name: lastName,
                 price_id: stripePriceId
             },
-        });
+        };
+
+        // Si on a des infos d'adresse, on pré-remplit pour Stripe (important pour Stripe Tax)
+        if (address && zip && city && countryIso) {
+            sessionOptions.customer_details = {
+                address: {
+                    line1: address,
+                    postal_code: zip,
+                    city: city,
+                    country: countryIso,
+                }
+            };
+        }
+
+        const session = await stripe.checkout.sessions.create(sessionOptions);
 
         console.log('✅ Session créée avec succès:', session.id);
         res.json({ url: session.url });
