@@ -79,10 +79,6 @@
     box-shadow: 0 4px 15px rgba(255, 107, 53, 0.2);
 }
 
-.btn-text-mobile {
-    display: none;
-}
-
 .mobile-toggle {
     display: none;
     background: none;
@@ -162,17 +158,8 @@
         margin-left: 15px;
     }
 
-    .btn-orange-header {
-        padding: 8px 16px;
-        font-size: 0.85rem;
-    }
-
-    .btn-text-desktop {
-        display: none;
-    }
-
-    .btn-text-mobile {
-        display: inline;
+    .header-actions {
+        order: 3;
     }
 
     .header-custom.open-menu {

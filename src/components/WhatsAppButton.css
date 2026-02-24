@@ -86,8 +86,7 @@
 /* Mobile responsive adjustments matching chatbot behavior */
 @media (max-width: 768px) {
     .whatsapp-fixed-button {
-        bottom: 80px;
-        /* Remonté pour être bien visible au-dessus des barres de navigation natives */
+        bottom: 100px;
         right: 20px;
     }
 
@@ -109,7 +108,7 @@
 
 @media (max-width: 480px) {
     .whatsapp-fixed-button {
-        bottom: 75px;
+        bottom: 90px;
         right: 15px;
     }
 }
