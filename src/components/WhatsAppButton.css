@@ -86,19 +86,20 @@
 /* Mobile responsive adjustments matching chatbot behavior */
 @media (max-width: 768px) {
     .whatsapp-fixed-button {
-        bottom: 20px;
-        bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+        bottom: 80px;
+        /* Remonté pour être bien visible au-dessus des barres de navigation natives */
         right: 20px;
     }
 
     .whatsapp-icon-container {
-        width: 55px;
-        height: 55px;
+        width: 50px;
+        height: 50px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
 
     .whatsapp-icon-container svg {
-        width: 28px;
-        height: 28px;
+        width: 26px;
+        height: 26px;
     }
 
     .whatsapp-tooltip {
@@ -108,8 +109,7 @@
 
 @media (max-width: 480px) {
     .whatsapp-fixed-button {
-        bottom: 15px;
-        bottom: calc(15px + env(safe-area-inset-bottom, 0px));
+        bottom: 75px;
         right: 15px;
     }
 }

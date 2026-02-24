@@ -56,7 +56,8 @@ const Header = ({ onReserveClick, onNavigate }) => {
             className="btn btn-orange-header"
             onClick={() => { onReserveClick(); handleNavClick(); }}
           >
-            Réserver un appel
+            <span className="btn-text-desktop">Réserver un appel</span>
+            <span className="btn-text-mobile">Réserver</span>
           </button>
         </div>
       </div>
