@@ -86,29 +86,23 @@
 /* Mobile responsive adjustments matching chatbot behavior */
 @media (max-width: 768px) {
     .whatsapp-fixed-button {
-        bottom: 100px;
-        right: 20px;
+        bottom: 60px;
+        right: 30px;
+        /* Plus décalé du bord droit */
+        z-index: 10000;
     }
 
     .whatsapp-icon-container {
-        width: 50px;
-        height: 50px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .whatsapp-icon-container svg {
-        width: 26px;
-        height: 26px;
-    }
-
-    .whatsapp-tooltip {
-        display: none;
+        width: 60px;
+        height: 60px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
     }
 }
 
 @media (max-width: 480px) {
     .whatsapp-fixed-button {
-        bottom: 90px;
-        right: 15px;
+        bottom: 60px;
+        right: 25px;
+        /* Évite d'être trop près du bord sur petit écran */
     }
 }
