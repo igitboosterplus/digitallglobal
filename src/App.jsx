@@ -22,6 +22,7 @@ import Success from './components/Success';
 import Login from './components/Login';
 import MemberDashboard from './components/MemberDashboard';
 import { useAuth } from './context/AuthContext';
+import SEO from './components/SEO';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -55,10 +56,20 @@ const AppLayout = ({
           <Route path="/" element={
             isCheckoutOpen && selectedPlan ? (
               <div className="container" style={{ padding: '40px 0' }}>
+                <SEO
+                  title="Paiement Sécurisé"
+                  description="Finalisez votre commande sur Digitall Global."
+                  path="/checkout"
+                />
                 <Checkout plan={selectedPlan} onClose={closeCheckout} />
               </div>
             ) : (
               <>
+                <SEO
+                  title="Votre agence digitale clé en main"
+                  description="Digitall Global vous offre une infrastructure complète pour vendre vos services digitaux et scaler votre agence de 0 à 10k/mois."
+                  path="/"
+                />
                 <Hero />
                 <Mission />
                 <Services />
@@ -76,11 +87,22 @@ const AppLayout = ({
               </>
             )
           } />
-          <Route path="/success" element={<Success />} />
+          <Route path="/success" element={
+            <>
+              <SEO title="Paiement Réussi" description="Merci pour votre commande sur Digitall Global." path="/success" />
+              <Success />
+            </>
+          } />
           <Route path="/cancel" element={<div style={{ padding: '100px', textAlign: 'center' }}><h1>Paiement annulé</h1><button onClick={() => window.location.href = '/'}>Retour</button></div>} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={
+            <>
+              <SEO title="Connexion" description="Accédez à votre espace membre Digitall Global." path="/login" />
+              <Login />
+            </>
+          } />
           <Route path="/member-area" element={
             <ProtectedRoute>
+              <SEO title="Espace Membre" description="Gérez votre agence et vos prestations." path="/member-area" />
               <MemberDashboard />
             </ProtectedRoute>
           } />

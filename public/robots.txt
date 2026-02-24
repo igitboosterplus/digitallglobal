@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /member-area/
+Disallow: /success/
+
+Sitemap: https://digitall-global.com/sitemap.xml
