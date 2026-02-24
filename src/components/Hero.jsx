@@ -82,7 +82,7 @@ const Hero = () => {
                         </div>
                         <div className="feature-text">
                             <h4>Agence Nouvelle Génération</h4>
-                            <p>Un site web conçu pour soutenir vos démarches commerciales et votre stratégie digitale. Prête à l’usage, avec une livraison sous dix (10) jours.</p>
+                            <p>Un site web conçu pour soutenir vos démarches commerciales et votre stratégie digitale. Prête à l’usage, avec une livraison sous dix (20) jours.</p>
                         </div>
                     </div>
                     <div className="feature-box navy">
