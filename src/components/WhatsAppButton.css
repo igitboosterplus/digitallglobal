@@ -102,7 +102,7 @@
 @media (max-width: 480px) {
     .whatsapp-fixed-button {
         bottom: 60px;
-        right: 25px;
-        /* Évite d'être trop près du bord sur petit écran */
+        right: 45px;
+        /* Décalé nettement vers la gauche pour être bien visible */
     }
 }

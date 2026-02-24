@@ -167,9 +167,14 @@
     }
 
     .btn-orange-header {
-        padding: 8px 12px;
-        font-size: 0.75rem;
-        white-space: nowrap;
+        padding: 6px 10px;
+        font-size: 0.7rem;
+        white-space: normal;
+        /* Autorise le retour à la ligne */
+        line-height: 1.1;
+        text-align: center;
+        max-width: 80px;
+        /* Force le passage à la ligne du mot 'appel' */
     }
 
     .header-custom.open-menu {
