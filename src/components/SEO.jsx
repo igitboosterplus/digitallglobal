@@ -4,8 +4,8 @@ import { Helmet } from 'react-helmet-async';
 const SEO = ({ title, description, path, type = 'website' }) => {
     const siteName = 'Digitall Global';
     const fullTitle = `${title} | ${siteName}`;
-    const url = `https://digitall-global.com${path || ''}`;
-    const image = 'https://digitall-global.com/logo-digitall.png'; // Image par défaut pour le partage
+    const url = `https://digitallglobal.com${path || ''}`;
+    const image = 'https://digitallglobal.com/logo-digitall.png'; // Image par défaut pour le partage
 
     return (
         <Helmet>
