@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, ArrowRight, CheckCircle2, Globe, Zap, Users, Target } from 'lucide-react';
+import { Star, ArrowRight, CheckCircle2, Network, Rocket, UserCheck, Crown } from 'lucide-react';
 import './Hero.css';
 
 const Hero = () => {
@@ -22,7 +22,7 @@ const Hero = () => {
 
                         <div className="hero-buttons">
                             <button className="btn btn-navy">Nos Offres</button>
-                            <button className="btn btn-outline-orange"></button>
+                            <button className="btn btn-outline-orange">En savoir plus</button>
                         </div>
 
                         <div className="hero-trust-badge">
@@ -30,20 +30,20 @@ const Hero = () => {
                                 {[1, 2, 3].map(i => (
                                     <div key={i} className="avatar">
                                         <img src={`https://i.pravatar.cc/150?u=hero${i}`} alt="user" />
-                                    </div>
+                                    </div >
                                 ))}
-                            </div>
+                            </div >
                             <div className="trust-info">
                                 <div className="stars">
                                     {[1, 2, 3, 4, 5].map(s => <Star key={s} size={14} fill="#FFD700" color="#FFD700" />)}
                                 </div>
                                 <span>Excellent - 500+ avis</span>
                             </div>
-                        </div>
-                    </div>
+                        </div >
+                    </div >
 
                     {/* Right: Visual Overhaul - Sophisticated Geometry */}
-                    <div className="hero-visual">
+                    < div className="hero-visual" >
                         <div className="visual-geometry-stack">
                             <div className="geometry-square glass-base"></div>
                             <div className="geometry-square main-navy"></div>
@@ -62,14 +62,14 @@ const Hero = () => {
                             <div className="deco-dot dot-1"></div>
                             <div className="deco-dot dot-2"></div>
                         </div>
-                    </div>
-                </div>
+                    </div >
+                </div >
 
                 {/* Bottom Feature Grid */}
-                <div className="hero-feature-grid">
+                < div className="hero-feature-grid" >
                     <div className="feature-box navy">
                         <div className="feature-icon-wrap">
-                            <Globe size={24} />
+                            <Network size={28} strokeWidth={2.5} />
                         </div>
                         <div className="feature-text">
                             <h4>Écosystème de Réussite</h4>
@@ -78,7 +78,7 @@ const Hero = () => {
                     </div>
                     <div className="feature-box orange">
                         <div className="feature-icon-wrap">
-                            <Zap size={24} />
+                            <Rocket size={28} strokeWidth={2.5} />
                         </div>
                         <div className="feature-text">
                             <h4>Agence Nouvelle Génération</h4>
@@ -87,7 +87,7 @@ const Hero = () => {
                     </div>
                     <div className="feature-box navy">
                         <div className="feature-icon-wrap">
-                            <Users size={24} />
+                            <UserCheck size={28} strokeWidth={2.5} />
                         </div>
                         <div className="feature-text">
                             <h4>Prestataires Qualifiés</h4>
@@ -96,16 +96,16 @@ const Hero = () => {
                     </div>
                     <div className="feature-box navy">
                         <div className="feature-icon-wrap">
-                            <Target size={24} />
+                            <Crown size={28} strokeWidth={2.5} />
                         </div>
                         <div className="feature-text">
                             <h4>Espace Membre Exclusif</h4>
                             <p>Un guide structuré pour vous orienter. Rudy partage des méthodes, des retours d'expérience et des outils concrets pour vous accompagner pas à pas. 🎯</p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
+                </div >
+            </div >
+        </section >
     );
 };
 
