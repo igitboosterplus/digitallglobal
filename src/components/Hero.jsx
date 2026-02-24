@@ -66,10 +66,10 @@ const Hero = () => {
                 </div >
 
                 {/* Bottom Feature Grid */}
-                < div className="hero-feature-grid" >
+                <div className="hero-feature-grid">
                     <div className="feature-box navy">
-                        <div className="feature-icon-wrap">
-                            <Network size={28} strokeWidth={2.5} />
+                        <div className="feature-asset-wrap">
+                            <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Globe%20with%20meridians/3D/globe_with_meridians_3d.png" alt="Ecosystème" className="feature-3d-asset" />
                         </div>
                         <div className="feature-text">
                             <h4>Écosystème de Réussite</h4>
@@ -77,8 +77,8 @@ const Hero = () => {
                         </div>
                     </div>
                     <div className="feature-box orange">
-                        <div className="feature-icon-wrap">
-                            <Rocket size={28} strokeWidth={2.5} />
+                        <div className="feature-asset-wrap">
+                            <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Rocket/3D/rocket_3d.png" alt="Agence" className="feature-3d-asset" />
                         </div>
                         <div className="feature-text">
                             <h4>Agence Nouvelle Génération</h4>
@@ -86,24 +86,24 @@ const Hero = () => {
                         </div>
                     </div>
                     <div className="feature-box navy">
-                        <div className="feature-icon-wrap">
-                            <UserCheck size={28} strokeWidth={2.5} />
+                        <div className="feature-asset-wrap">
+                            <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Handshake/3D/handshake_3d.png" alt="Prestataires" className="feature-3d-asset" />
                         </div>
                         <div className="feature-text">
                             <h4>Prestataires Qualifiés</h4>
-                            <p>Déléguez les prestations à des experts qualifiés, sélectionnés pour leur savoir-faire, afin de proposer des services digitaux d'excellence. 💼</p>
+                            <p>Déléguez les prestations à des experts qualifiés, sélectionnés pour leur savoir-faire, afin de proposer des services digitaux d'excellence.</p>
                         </div>
                     </div>
                     <div className="feature-box navy">
-                        <div className="feature-icon-wrap">
-                            <Crown size={28} strokeWidth={2.5} />
+                        <div className="feature-asset-wrap">
+                            <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Crown/3D/crown_3d.png" alt="Espace Membre" className="feature-3d-asset" />
                         </div>
                         <div className="feature-text">
                             <h4>Espace Membre Exclusif</h4>
-                            <p>Un guide structuré pour vous orienter. Rudy partage des méthodes, des retours d'expérience et des outils concrets pour vous accompagner pas à pas. 🎯</p>
+                            <p>Un guide structuré pour vous orienter. Rudy partage des méthodes, des retours d'expérience et des outils pour vous accompagner pas à pas.</p>
                         </div>
                     </div>
-                </div >
+                </div>
             </div >
         </section >
     );
