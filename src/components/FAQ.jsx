@@ -53,7 +53,7 @@ const FAQ = () => {
 
                             <div className="phone-wrapper">
                                 <Phone size={18} color="var(--color-azure-main)" />
-                                <span>+33 6 42 35 12 45</span>
+                                <span>+33 6 98 07 56 74</span>
                             </div>
 
                             <button className="btn btn-orange-rounded">
