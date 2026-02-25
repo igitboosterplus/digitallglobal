@@ -3,8 +3,8 @@ require('dotenv').config();
 
 const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
-    port: 465, // Force 465 for SSL
-    secure: true,
+    port: parseInt(process.env.SMTP_PORT) || 465,
+    secure: process.env.SMTP_PORT == 465, // true pour 465, false pour les autres
     auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
@@ -110,7 +110,7 @@ async function sendAdminNotification(orderDetails, customerEmail, customerName) 
 
     const mailOptions = {
         from: `"Système Digitall Global" <${process.env.SMTP_USER}>`,
-        to: process.env.SMTP_USER, // L'admin reçoit le mail sur sa propre adresse
+        to: process.env.ADMIN_EMAIL || process.env.SMTP_USER, // Utilise ADMIN_EMAIL si défini, sinon SMTP_USER
         subject: `💰 NOUVELLE VENTE : ${planName} (${amount} ${currency})`,
         html: `
             <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
