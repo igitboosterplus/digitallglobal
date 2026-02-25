@@ -62,13 +62,23 @@ const AgenciesSection = () => {
                                     className="agency-mock-card"
                                     onClick={() => handlePreview(agency.url)}
                                 >
-                                    <div className="mock-badge">{agency.url === "#" ? "DEMO" : "LIVE"}</div>
+                                    <div className="mock-badge">{agency.url === "#" ? "MODÈLE" : "PARTENAIRE"}</div>
                                     <div className="mock-image">
+                                        {agency.url !== "#" ? (
+                                            <img
+                                                src={`https://api.microlink.io/?url=${agency.url}&screenshot=true&meta=false&embed=screenshot.url`}
+                                                alt={agency.name}
+                                                className="mock-screenshot"
+                                            />
+                                        ) : (
+                                            <div className="mock-placeholder">
+                                                <span>Aperçu de l'agence</span>
+                                            </div>
+                                        )}
                                         <div className="mock-overlay">
                                             <Play size={24} fill="white" />
-                                            <span className="view-text">Voir le site</span>
+                                            <span className="view-text">Explorer l'agence</span>
                                         </div>
-                                        <div className="agency-name-overlay">{agency.name}</div>
                                     </div>
                                     <div className="mock-number">{agency.id}</div>
                                 </div>
