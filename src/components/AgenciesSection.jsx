@@ -7,7 +7,7 @@ const AgenciesSection = () => {
     const [isLoading, setIsLoading] = React.useState(false);
 
     const agencies = [
-        { id: 1, name: "Orich Solutions", url: "https://orichsolutions.com" },
+        { id: 1, name: "Orich Solutions", url: "https://oritchsolutions.com" },
         { id: 2, name: "Nutrition Expert", url: "#" },
         { id: 3, name: "Spa & Bien-être", url: "#" },
         { id: 4, name: "Immobilier Pro", url: "#" },
