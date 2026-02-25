@@ -3,16 +3,34 @@ import { Play } from 'lucide-react';
 import './AgenciesSection.css';
 
 const AgenciesSection = () => {
+    const [previewUrl, setPreviewUrl] = React.useState(null);
+    const [isLoading, setIsLoading] = React.useState(false);
+
     const agencies = [
-        { id: 1, name: "Nutrition" },
-        { id: 2, name: "Spa" },
-        { id: 3, name: "Real Estate" },
-        { id: 4, name: "Crypto" },
-        { id: 5, name: "Fashion" },
-        { id: 6, name: "Auto" },
-        { id: 7, name: "Food" },
-        { id: 8, name: "Travel" }
+        { id: 1, name: "Orich Solutions", url: "https://orichsolutions.com" },
+        { id: 2, name: "Nutrition Expert", url: "#" },
+        { id: 3, name: "Spa & Bien-être", url: "#" },
+        { id: 4, name: "Immobilier Pro", url: "#" },
+        { id: 5, name: "Crypto Vision", url: "#" },
+        { id: 6, name: "Mode & Style", url: "#" },
+        { id: 7, name: "Auto Moto", url: "#" },
+        { id: 8, name: "Food Delivery", url: "#" }
     ];
+
+    const handlePreview = (url) => {
+        if (url === "#") return;
+        setPreviewUrl(url);
+        setIsLoading(true);
+        // On simule un temps de chargement pour montrer le logo
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 2500);
+    };
+
+    const closePreview = () => {
+        setPreviewUrl(null);
+        setIsLoading(false);
+    };
 
     return (
         <section className="agencies-section">
@@ -39,12 +57,18 @@ const AgenciesSection = () => {
                     <div className="agencies-grid-wrap">
                         <div className="agencies-mock-grid">
                             {agencies.map((agency) => (
-                                <div key={agency.id} className="agency-mock-card">
-                                    <div className="mock-badge">NEW</div>
+                                <div
+                                    key={agency.id}
+                                    className="agency-mock-card"
+                                    onClick={() => handlePreview(agency.url)}
+                                >
+                                    <div className="mock-badge">{agency.url === "#" ? "DEMO" : "LIVE"}</div>
                                     <div className="mock-image">
                                         <div className="mock-overlay">
-                                            <Play size={16} fill="white" />
+                                            <Play size={24} fill="white" />
+                                            <span className="view-text">Voir le site</span>
                                         </div>
+                                        <div className="agency-name-overlay">{agency.name}</div>
                                     </div>
                                     <div className="mock-number">{agency.id}</div>
                                 </div>
@@ -53,6 +77,31 @@ const AgenciesSection = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Site Preview Modal */}
+            {previewUrl && (
+                <div className="site-preview-modal">
+                    <div className="preview-overlay" onClick={closePreview}></div>
+                    <div className="preview-container">
+                        <button className="preview-close" onClick={closePreview}>×</button>
+
+                        {isLoading ? (
+                            <div className="preview-loader">
+                                <img src="/logo-digitall.png" alt="Digitall Global" className="loader-logo" />
+                                <div className="loader-spinner"></div>
+                                <p>Préparation de votre agence...</p>
+                            </div>
+                        ) : (
+                            <iframe
+                                src={previewUrl}
+                                title="Site Preview"
+                                className="preview-iframe"
+                                frameBorder="0"
+                            ></iframe>
+                        )}
+                    </div>
+                </div>
+            )}
         </section>
     );
 };
