@@ -61,17 +61,9 @@ router.post('/create-checkout-session', async (req, res) => {
             },
         };
 
-        // Si on a des infos d'adresse, on pré-remplit pour Stripe (important pour Stripe Tax)
-        if (address && zip && city && countryIso) {
-            sessionOptions.customer_details = {
-                address: {
-                    line1: address,
-                    postal_code: zip,
-                    city: city,
-                    country: countryIso,
-                }
-            };
-        }
+        // Les informations d'adresse sont passées dans les métadonnées (déjà fait au-dessus)
+        // car customer_details n'est pas autorisé en entrée lors de sessions.create.
+        // Stripe Tax collectera l'adresse lui-même si nécessaire.
 
         const session = await stripe.checkout.sessions.create(sessionOptions);
 
