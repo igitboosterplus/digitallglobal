@@ -2,12 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://digitallglobal.com/</loc>
-    <lastmod>2026-02-24</lastmod>
+    <lastmod>2026-03-13</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://digitallglobal.com/login</loc>
-    <lastmod>2026-02-24</lastmod>
-    <priority>0.5</priority>
+    <lastmod>2026-03-13</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://digitallglobal.com/mentions</loc>
+    <lastmod>2026-03-13</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://digitallglobal.com/cgv</loc>
+    <lastmod>2026-03-13</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://digitallglobal.com/politique</loc>
+    <lastmod>2026-03-13</lastmod>
+    <priority>0.3</priority>
   </url>
 </urlset>

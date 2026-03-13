@@ -1,5 +1,6 @@
 import React from 'react';
 import { Twitter, Instagram, Facebook } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import './Footer.css';
 
 const Footer = () => {
@@ -24,9 +25,9 @@ const Footer = () => {
                     <div className="footer-col-links">
                         <h4>Info</h4>
                         <ul>
-                            <li><a href="/mentions">Mentions légales</a></li>
-                            <li><a href="/cgv">CGV</a></li>
-                            <li><a href="/politique">Privacy Policy</a></li>
+                            <li><Link to="/mentions">Mentions légales</Link></li>
+                            <li><Link to="/cgv">CGV</Link></li>
+                            <li><Link to="/politique">Privacy Policy</Link></li>
                         </ul>
                     </div>
 

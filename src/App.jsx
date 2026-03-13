@@ -24,6 +24,8 @@ import MemberDashboard from './components/MemberDashboard';
 import { useAuth } from './context/AuthContext';
 import SEO from './components/SEO';
 
+import LegalPage from './components/LegalPage';
+
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
   const { isLoggedIn, loading } = useAuth();
@@ -106,6 +108,9 @@ const AppLayout = ({
               <MemberDashboard />
             </ProtectedRoute>
           } />
+          <Route path="/mentions" element={<LegalPage type="mentions" />} />
+          <Route path="/cgv" element={<LegalPage type="cgv" />} />
+          <Route path="/politique" element={<LegalPage type="politique" />} />
           <Route path="*" element={<div style={{ padding: '100px', textAlign: 'center' }}><h1>Page non trouvée</h1><button onClick={() => window.location.href = '/'}>Retour à l'accueil</button></div>} />
         </Routes>
       </main>

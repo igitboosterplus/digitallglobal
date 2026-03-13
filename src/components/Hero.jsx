@@ -21,8 +21,8 @@ const Hero = () => {
                         </p>
 
                         <div className="hero-buttons">
-                            <button className="btn btn-navy">Nos Offres</button>
-                            <button className="btn btn-outline-orange">En savoir plus</button>
+                            <a href="#tarifs" className="btn btn-navy">Nos Offres</a>
+                            <a href="#solution" className="btn btn-outline-orange">En savoir plus</a>
                         </div>
 
                         <div className="hero-trust-badge">
