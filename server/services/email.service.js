@@ -135,7 +135,42 @@ async function sendAdminNotification(orderDetails, customerEmail, customerName) 
     }
 }
 
+/**
+ * Sends a simple order confirmation email (for existing users).
+ */
+async function sendOrderConfirmation(email, orderDetails, firstName) {
+    const memberAreaUrl = process.env.MEMBER_AREA_URL || 'https://digitallglobal.com/login';
+    const { planName, amount, currency, transactionId, date } = orderDetails;
+
+    const mailOptions = {
+        from: `"Digitall Global" <${process.env.SMTP_USER}>`,
+        to: email,
+        subject: `✅ Confirmation de votre commande : ${planName}`,
+        html: `
+            <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #eee; padding: 20px; border-radius: 10px;">
+                <h2 style="color: #0099CC; text-align: center;">Merci pour votre confiance !</h2>
+                <p>Bonjour ${firstName || 'Cher client'},</p>
+                <p>Votre paiement pour l'offre <strong>${planName}</strong> a été validé avec succès.</p>
+                <p>Votre compte étant déjà actif, vous pouvez vous connecter dès maintenant pour accéder à vos services.</p>
+                
+                <div style="text-align: center; margin: 30px 0;">
+                    <a href="${memberAreaUrl}" style="background-color: #0099CC; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold;">Accéder à mon Espace Membre</a>
+                </div>
+
+                <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px;">
+                    <p style="margin-top:0;"><strong>Détails :</strong></p>
+                    <p>Montant : ${amount} ${currency}</p>
+                    <p>Transaction : ${transactionId}</p>
+                </div>
+            </div>
+        `,
+    };
+
+    return transporter.sendMail(mailOptions);
+}
+
 module.exports = {
     sendWelcomeEmail,
-    sendAdminNotification
+    sendAdminNotification,
+    sendOrderConfirmation
 };

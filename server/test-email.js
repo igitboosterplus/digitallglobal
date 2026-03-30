@@ -16,16 +16,25 @@ async function testEmail() {
     };
 
     try {
-        // Test 1: Email de bienvenue Client
-        console.log('Envoi de l\'email client...');
+        // Test 1: Email de bienvenue Client (Nouveau)
+        console.log('Envoi de l\'email de bienvenue (nouveau client)...');
         await sendWelcomeEmail(
             process.env.SMTP_USER,
             'MOT_DE_PASSE_123',
             fakeOrder,
-            'Client Test'
+            'Nouveau Client'
         );
 
-        // Test 2: Notification Admin
+        // Test 2: Confirmation de commande Simple (Client existant)
+        const { sendOrderConfirmation } = require('./services/email.service');
+        console.log('Envoi de la confirmation simple (client existant)...');
+        await sendOrderConfirmation(
+            process.env.SMTP_USER,
+            fakeOrder,
+            'Ancien Client'
+        );
+
+        // Test 3: Notification Admin
         const { sendAdminNotification } = require('./services/email.service');
         console.log('Envoi de la notification admin...');
         await sendAdminNotification(
@@ -34,13 +43,10 @@ async function testEmail() {
             'Client Test'
         );
 
-        console.log('✅ TEST RÉUSSI : Les deux emails ont été envoyés !');
-        console.log('Vérifiez votre boîte de réception pour les deux messages.');
+        console.log('\n✅ TEST FINAL RÉUSSI !');
+        console.log('Vérifiez votre boîte de réception pour les 3 messages de test.');
     } catch (error) {
-        console.error('❌ ÉCHEC DU TEST :', error.message);
-        if (error.message.includes('Invalid login')) {
-            console.log('Conseil : Vérifiez votre mot de passe d\'application Gmail.');
-        }
+        console.error('❌ ÉCHEC DU TEST FINAL :', error);
     }
 }
 

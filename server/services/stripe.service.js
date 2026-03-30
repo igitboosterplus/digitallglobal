@@ -1,6 +1,6 @@
 const pool = require('../config/db');
 const bcrypt = require('bcrypt');
-const { sendWelcomeEmail } = require('./email.service');
+const { sendWelcomeEmail, sendAdminNotification, sendOrderConfirmation } = require('./email.service');
 const crypto = require('crypto');
 
 /**
@@ -97,20 +97,21 @@ async function handleSuccessfulPayment(session) {
             date: new Date().toLocaleDateString('fr-FR')
         };
 
-        const { sendAdminNotification } = require('./email.service');
+        // 1. Notification Admin (Indispensable)
+        await sendAdminNotification(orderDetails, customerEmail, customerName);
+        console.log(`📧 Notification Admin envoyée.`);
 
-        // Email de bienvenue (uniquement si nouveau compte généré)
+        // 2. Email client (Bienvenue ou Confirmation)
         if (tempPassword) {
             await sendWelcomeEmail(customerEmail, tempPassword, orderDetails, customerName.split(' ')[0] || 'Client');
-            console.log('📧 Email de bienvenue envoyé avec succès.');
+            console.log('📧 Email de bienvenue (nouveaux accès) envoyé.');
+        } else {
+            await sendOrderConfirmation(customerEmail, orderDetails, customerName.split(' ')[0] || 'Client');
+            console.log('📧 Email de confirmation simple (user existant) envoyé.');
         }
 
-        // Email de notification ADMIN (pour TOUTE vente, nouveau ou ancien client)
-        await sendAdminNotification(orderDetails, customerEmail, customerName);
-        console.log('📧 Notification Admin envoyée pour une nouvelle vente.');
-
     } catch (emailError) {
-        console.error('❌ Erreur d\'envoi d\'emails (non-bloquante):', emailError.message);
+        console.error('❌ Erreur d\'envoi d\'emails (non-bloquante):', emailError);
     }
 
     console.log(`✅ Paiement traité avec succès pour l'utilisateur ${userId}`);
