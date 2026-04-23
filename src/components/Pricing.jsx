@@ -81,14 +81,14 @@ const Pricing = ({ onOrder }) => {
                             <div className="engagement-text">Engagement 6 mois</div>
 
                             <div className="price-block">
-                                <span className="price-val">1,21€</span>
+                                <span className="price-val">149€</span>
                                 <span className="price-ht">HT / Mois</span>
                             </div>
                             <div className="sub-price">pour un début prometteur et un accompagnement réussi </div>
 
                             <button
                                 className="btn btn-navy btn-plan"
-                                onClick={() => onOrder({ name: 'Offre Started', price: '1,21€', type: 'Started', description: "Dès le 1er mois – Vous avez accès à votre espace membre pour découvrir les outils et la solution." })}
+                                onClick={() => onOrder({ name: 'Offre Started', price: '149€', type: 'Started', description: "Dès le 1er mois – Vous avez accès à votre espace membre pour découvrir les outils et la solution." })}
                             >
                                 COMMANDER
                             </button>
