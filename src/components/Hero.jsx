@@ -17,7 +17,7 @@ const Hero = () => {
                             digitale <span className="blue-italic">clé en main.</span>
                         </h1>
                         <p className="hero-description">
-                            Digital global met à votre disposition une agence digitale clé en main, des outils et une expertise unique pour transformer votre vision en succès.
+                            Digitall global met à votre disposition une agence digitale clé en main, des outils et une expertise unique pour transformer votre vision en succès.
                         </p>
 
                         <div className="hero-buttons">

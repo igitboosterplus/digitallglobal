@@ -14,7 +14,7 @@ const LegalPage = ({ type }) => {
                             <h2>1. Présentation du site</h2>
                             <p>En vertu de l'article 6 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique, il est précisé aux utilisateurs du site digitallglobal.com l'identité des différents intervenants dans le cadre de sa réalisation et de son suivi :</p>
                             <p><strong>Propriétaire :</strong> Digitall Global – France</p>
-                            <p><strong>Responsable publication :</strong> Rudy – Contact@digitallglobal.com</p>
+                            <p><strong>Responsable publication :</strong> Rudy – contacts@digitallglobal.com</p>
                             <p><strong>Hébergeur :</strong> Vercel Inc. – 340 S Lemon Ave #4133 Walnut, CA 91789, USA</p>
 
                             <h2>2. Conditions générales d’utilisation du site et des services proposés</h2>
